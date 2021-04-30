@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="48.171" height="49.382" viewBox="0 0 48.171 49.382">
+  <defs>
+    <style>
+      .cls-1 {
+        opacity: 0.9;
+      }
+
+      .cls-2, .cls-5 {
+        fill: #fff;
+      }
+
+      .cls-2 {
+        stroke: #3a9cd8;
+      }
+
+      .cls-3 {
+        fill: #4398d1;
+      }
+
+      .cls-4 {
+        fill: #3a9cd8;
+      }
+
+      .cls-6 {
+        fill: #eaeaea;
+        opacity: 0.5;
+      }
+    </style>
+  </defs>
+  <g id="baby" class="cls-1" transform="translate(-12.668 -0.697)">
+    <path id="Path_2295" data-name="Path 2295" class="cls-2" d="M83.734,61h0a18.532,18.532,0,0,1,18.532,18.532v6.739a18.532,18.532,0,0,1-18.532,18.532h0A18.532,18.532,0,0,1,65.2,86.274V79.536A18.532,18.532,0,0,1,83.734,61Z" transform="translate(-46.98 -55.227)"/>
+    <g id="Group_4899" data-name="Group 4899" transform="translate(13.168 22.624)">
+      <path id="Path_2296" data-name="Path 2296" class="cls-2" d="M13.168,238.667a4.212,4.212,0,0,0,4.212,4.212h.842v-8.423H17.38A4.212,4.212,0,0,0,13.168,238.667Z" transform="translate(-13.168 -234.455)"/>
+      <path id="Path_2297" data-name="Path 2297" class="cls-2" d="M447.636,234.455h-.842v8.423h.842a4.212,4.212,0,1,0,0-8.423Z" transform="translate(-404.677 -234.455)"/>
+    </g>
+    <g id="Group_4900" data-name="Group 4900" transform="translate(23.276 21.778)">
+      <circle id="Ellipse_218" data-name="Ellipse 218" class="cls-3" cx="2.527" cy="2.527" r="2.527"/>
+      <circle id="Ellipse_219" data-name="Ellipse 219" class="cls-3" cx="2.527" cy="2.527" r="2.527" transform="translate(21.901)"/>
+    </g>
+    <path id="Path_2298" data-name="Path 2298" class="cls-4" d="M169.273,312.508H186.12a8.423,8.423,0,0,1-8.423,8.423h0a8.424,8.424,0,0,1-8.423-8.423Z" transform="translate(-140.943 -282.303)"/>
+    <path id="Path_2299" data-name="Path 2299" class="cls-4" d="M164.363,22.287a9.265,9.265,0,0,0-9.191-9.34h0l-.842-.007h0l-1.437-.011a2.78,2.78,0,0,1-2.353-4.23h-.384a6.739,6.739,0,0,0-6.375,9.054h0a6.739,6.739,0,0,0,6.275,4.421Z" transform="translate(-117.552 -8.002)"/>
+    <g id="Group_4901" data-name="Group 4901" transform="translate(33.384 30.202)">
+      <rect id="Rectangle_1011" data-name="Rectangle 1011" class="cls-5" width="3.369" height="3.369"/>
+      <rect id="Rectangle_1012" data-name="Rectangle 1012" class="cls-5" width="3.369" height="3.369" transform="translate(3.369)"/>
+    </g>
+    <rect id="Rectangle_1013" data-name="Rectangle 1013" class="cls-6" width="1.685" height="3.369" transform="translate(35.911 30.202)"/>
+  </g>
+</svg>

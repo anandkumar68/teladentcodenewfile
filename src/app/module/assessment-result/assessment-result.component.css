@@ -1,0 +1,219 @@
+.padgap{
+    padding-top: 5%;
+    padding-bottom: 2%;
+}
+
+
+
+.colstep{
+       box-shadow: 0px 3px 15px 0px rgb(0 0 0 / 5%);
+    background-color: white;
+    padding: 40px 40px;
+    border-radius: 6px;
+    z-index: 0;
+}
+
+.bgback{
+    background-image: linear-gradient(#3aa5d814, #ffff);
+    padding-bottom: 5%;
+}
+
+.yellocircle {
+    position: relative;
+    padding: 20px;
+}
+
+/* result css start */
+.resultbg {
+    background-image: url(/assets/img/oralself/resultbg.png);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    height: auto;
+    width: 100%;
+    box-shadow: unset;
+}
+
+.imgtdiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.emoji{
+    position: absolute;
+    top: 130px;
+    left: 40px;
+}
+.circle{
+    width: 170px;
+    height: auto;
+}
+.scorecir h6 {
+    color: #fdd159;
+    font-size: 40px;
+    margin: 0;
+    padding: 0;
+}
+.scorecir {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.scorecir p {
+    color: white;
+    font-size: 12px;
+    margin: 0;
+    padding: 0;
+}
+.namediv h4 {
+    color: white;
+}
+.namediv p {
+    color: white;
+        font-size: 13px;
+}
+.sharedownloaddiv {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 100%;
+}
+.sharedownloaddiv img {
+    width: 16px;
+    height: auto;
+}
+span.knowscal {
+    font-size: 12px;
+    color: white;
+    padding-left: 5px;
+    cursor: pointer;
+}
+.sharedown span {
+    margin-left: 20px;
+}
+.ourobserv {
+    background: #eefbff;
+    margin-top: 4%;
+   
+    border-radius: 10px;
+    border: 2px dotted #318abc5e;
+}
+.obslist {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    border-bottom: 2px dotted #9395a0;
+     padding: 20px;
+}
+.bg-image-21 {
+    background: #f6fbfe;
+}
+ul.obslist li {
+    width: 190px;
+    margin: auto;
+    align-items: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.ourobserv h4 {
+    padding-top: 20px;
+}
+.whitebox img {
+    width: 30px;
+}
+.recombox {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 20px;
+}
+.whitebox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: white;
+    padding: 15px 15px;
+    border-radius: 5px;
+    width: 176px;
+}
+.whitebox h6{
+    font-size: 13px;
+    padding-left: 10px;
+}
+.bookbt {
+    border: 1px solid #3a9cd8;
+    width: 180px;
+    text-align: center;
+    background-color: #3a9cd8;
+    padding: 5px;
+    border-radius: 20px;
+    font-size: 12px;
+    color: white;
+    cursor: pointer;
+    text-align: center;
+    align-items: center;
+    margin: auto;
+    margin-bottom: 26px;
+    margin-top: 10px;
+}
+
+/* media start here */
+@media only screen and (max-width: 600px) {
+
+.imgtdiv {
+    display: block
+}
+.obslist{
+    display: block;
+}
+.recombox{
+    display: block;
+}
+.colstep {
+    padding: 20px 20px;
+}
+.circle {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+.emoji{
+    top: unset;
+    left: 35px;
+    bottom: 70px;
+}
+.namediv {
+    padding: 0 20px;
+    text-align: center;
+}
+.sharedownloaddiv{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 100%;
+    padding-bottom: 20px;
+}
+.whitebox{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: white;
+    padding: 15px 15px;
+    border-radius: 5px;
+    width: 100%;
+    margin: auto;
+    margin-bottom: 10px;
+}
+.yellocircle{
+    position: relative;
+    padding: 20px;
+    width: 90%;
+    margin: auto;
+}
+.btn-grad {
+    margin: auto;
+    margin-top: 20px;
+}
+}
+/* media end */

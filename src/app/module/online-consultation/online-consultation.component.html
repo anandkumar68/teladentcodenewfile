@@ -1,0 +1,153 @@
+<!-- Breadcrumb -->
+<div class="breadcrumb-bar">
+    <div class="container-fluid">
+        <div class="row align-items-center">
+            <div class="col-md-8 col-12">
+                <nav aria-label="breadcrumb" class="page-breadcrumb">
+                </nav>
+                <h2 class="breadcrumb-title">{{totalDocuments}} matches found for : Dentist</h2>
+            </div>
+            <!-- <div class="col-md-4 col-12 d-md-block d-none">
+                <div class="sort-by">
+                    <span class="sort-title">Sort by</span>
+                    <span class="sortby-fliter">
+                        <select class="select">
+                            <option>Select</option>
+                            <option class="sorting">Rating</option>
+                            <option class="sorting">Popular</option>
+                            <option class="sorting">Latest</option>
+                            <option class="sorting">Free</option>
+                        </select>
+                    </span>
+                </div>
+            </div> -->
+        </div>
+    </div>
+</div>
+<!-- /Breadcrumb -->
+
+
+<!-- Page Content -->
+<div class="content">
+    <div class="container-fluid">
+        <ngx-ui-loader [loaderId]="'loader-01'"></ngx-ui-loader>
+        <div class="row">
+            <div class="col-md-12 col-lg-4 col-xl-3 theiaStickySidebar">
+
+                <!-- Search Filter -->
+                <div class="card search-filter">
+                    <div class="card-header">
+                        <h4 class="card-title mb-0">Search Filter</h4>
+                    </div>
+                    <div class="card-body">
+
+                        <div class="filter-widget">
+                            <h4>Gender</h4>
+                            <div>
+                                <label class="custom_check">
+                                    <input type="checkbox" id="Male" (click)="filterGender('Male')">
+                                    <span class="checkmark"></span> Male Doctor
+                                </label>
+                            </div>
+                            <div>
+                                <label class="custom_check">
+                                    <input type="checkbox" id="Female" (click)="filterGender('Female')">
+                                    <span class="checkmark"></span> Female Doctor
+                                </label>
+                            </div>
+                        </div>
+                        <div class="filter-widget">
+                            <h4>Select Specialist</h4>
+                            <div *ngFor="let specialist of userDoctorSpecialistList">
+                                <label class="custom_check">
+                                    <input type="checkbox" id="{{specialist}}" (click)="filterSpecialist(specialist)">
+                                    <span class="checkmark"></span> {{specialist}}
+                                </label>
+                            </div>
+                        </div>
+                        <div class="btn-search">
+                            <button [ngClass]="isDisabledClassActive === true ? 'disabled' : '' " type="button" id="filterSearch" class="btn btn-block" (click)="filterDoctor()">Search</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- /Search Filter -->
+
+            </div>
+
+            <div class="col-md-12 col-lg-8 col-xl-9">
+
+                <!-- Doctor Widget -->
+                <div class="card" *ngFor="let doctor of userDoctorList | paginate: { itemsPerPage: limit, currentPage: pageNum }">
+                    <div class="card-body">
+                        <div class="doctor-widget">
+                            <div class="doc-info-left">
+                                <div class="doctor-img">
+                                    <a routerLink="/doctor-profile">
+                                        <img src="{{doctor?.imageUrl}}" class="img-fluid" alt="User Image">
+                                    </a>
+                                </div>
+                                <div class="doc-info-cont">
+                                    <h4 class="doc-name">
+                                        <a routerLink="#">{{doctor?.name}}</a>
+                                    </h4>
+                                    <p class="doc-speciality">{{doctor?.education}}</p>
+                                    <h5 class="doc-department"><img src="assets/img/specialities/specialities-05.png" class="img-fluid" alt="Speciality">{{doctor?.dentistType}}</h5>
+                                    <div class="rating">
+                                        <i *ngIf="doctor?.rating === 1 || doctor?.rating > 1" class="fas fa-star filled"></i>
+                                        <i *ngIf="doctor?.rating < 1" class="fas fa-star"></i>
+
+                                        <i *ngIf="doctor?.rating === 2 || doctor?.rating > 2" class="fas fa-star filled"></i>
+                                        <i *ngIf="doctor?.rating < 2" class="fas fa-star"></i>
+
+                                        <i *ngIf="doctor?.rating === 3 || doctor?.rating > 3" class="fas fa-star filled"></i>
+                                        <i *ngIf="doctor?.rating < 3" class="fas fa-star"></i>
+
+                                        <i *ngIf="doctor?.rating === 4 || doctor?.rating > 4" class="fas fa-star filled"></i>
+                                        <i *ngIf="doctor?.rating < 4" class="fas fa-star"></i>
+
+                                        <i *ngIf="doctor?.rating === 5" class="fas fa-star filled"></i>
+                                        <i *ngIf="doctor?.rating < 5" class="fas fa-star"></i>
+                                        <span class="d-inline-block average-rating">({{doctor?.totalReview}})</span>
+                                    </div>
+                                    <div class="clinic-details">
+                                        <p class="doc-location"><i class="fas fa-map-marker-alt"></i> {{doctor?.city}}, {{doctor?.state}}</p>
+                                    </div>
+                                    <div class="clinic-services">
+                                        <span *ngFor="let service of doctor?.services">{{service}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="doc-info-right">
+                                <div class="clini-infos">
+                                    <ul>
+                                        <li><i class="far fa-thumbs-up"></i> {{doctor?.ratingPercentage}}%</li>
+                                        <li><i class="fas fa-map-marker-alt"></i> {{doctor?.city}}, {{doctor?.state}}</li>
+                                        <li><i class="far fa-money-bill-alt"></i> ₹{{doctor?.price}} <i class="fas fa-info-circle" data-toggle="tooltip" title="Per Visit"></i> </li>
+                                    </ul>
+                                </div>
+                                <div class="clinic-booking">
+                                    <a class="view-pro-btn" (click)="viewProfile(doctor?._id)" href="javascript:void(0);">View Profile</a>
+                                    <a class="apt-btn" (click)="appointmentForward(doctor?._id)" href="javascript:void(0);">Book Appointment</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /Doctor Widget -->
+
+                <div class="row result-str">
+                    <!-- <div class="col-sm-12 col-md-5 ">
+                            <p> {{ (pageNum-1) * limit + 1 }} to {{ math.min((pageNum * limit), userDoctorList.length) }} of {{ appointmentList.length }} entries </p>
+                        </div> -->
+                    <div class="col-sm-12 col-md-12 text-left">
+                        <pagination-controls [directionLinks]="directionLinks" [autoHide]="autoHide" [responsive]="responsive" [previousLabel]="labels.previousLabel" [nextLabel]="labels.nextLabel" (pageChange)="onPageChange($event)">
+                        </pagination-controls>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+<!-- /Page Content -->

@@ -1,0 +1,153 @@
+.bgw{
+    background-color: white !important;
+}
+
+.bgimg{
+     background-image: url("../../../assets/img/about/bgintro.png");
+    background-size: 100% 75%;
+    background-repeat: no-repeat;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    background-color: white;
+}
+
+.fcs
+{
+    color: #272b41
+}
+
+.fw
+{
+        font-weight: 600;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: #272b41;
+    font-weight: 600;
+}
+
+.nav-tabs {
+    border-bottom: 0px solid #f0f0f0;
+}
+
+.gc
+{
+    padding-left: 15%;
+    padding-right: 15%;
+    font-weight: 500;
+}
+
+span.dd {
+    padding-left: 11px;
+    padding-right: 11px;
+}
+
+.bg-image-21 {
+    background: url(../../../assets/img/about/bbb.png) no-repeat center;
+    background-size: cover;
+}
+
+.bdd
+{
+    border: 1px solid #f9f9ed;
+}
+
+.pop
+{
+    padding-bottom: 6%;
+    padding-top: 2%;
+}
+
+p.itext {
+    color: #9395a0;
+    font-size: 13px;
+    padding-top: 6px;
+}
+
+.p9
+{
+    padding-left: 28px;
+}
+
+.rp
+{
+    padding: 9px 37px 12px 37px;
+}
+
+.p40
+{
+    padding-top: 40px;
+}
+
+img.imgw {
+    width: 100%;
+}
+
+
+.infobytetab a.active {
+       display: flex;
+    color: #259cd7;
+    border-bottom: 3px solid #259cd7;
+    box-shadow: 4px 6px 5px -5px #0000006b;
+    border-top: 1px solid beige;
+    border-left: 1px solid beige;
+    border-right: 1px solid beige;
+    border-radius: 6px;
+    background: white;
+  
+}
+
+@media only screen and (max-width: 600px) {
+ 
+
+.btn-grad {
+    margin: 10px 5px;
+    padding: 13px 10px;
+}
+
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active, .nav-tabs>li>a.active, .nav-tabs>li>a.active:hover, .nav-tabs>li>a.active:focus {
+    
+    border-color: #f5fde5 #f5fde5 #259cd7 #f5fde5 !important;
+    border-left-width: 2px;
+}
+
+.bdd {
+    border: 1px solid #f9f9ed;
+    padding-bottom: 20px;
+}
+
+
+
+.rp {
+    padding: 9px 37px 25px 37px;
+    font-size: 17px;
+}
+
+ul.infobytetab.nav.nav-tabs {
+    display: block;
+    text-align: center;
+}
+
+.infobytetab a.active {
+    display: block;
+    color: #259cd7;
+    border-bottom: 3px solid #259cd7;
+        background: white;
+}
+
+.nav-tabs {
+    
+    border: 0px solid #ddd;
+    
+}
+
+.lio
+{
+    text-align: left;
+    padding-bottom: 12px;
+}
+
+
+
+}
+

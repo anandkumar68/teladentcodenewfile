@@ -1,0 +1,689 @@
+<ngx-ui-loader [loaderId]="'loader-02'"></ngx-ui-loader>
+
+<!-- Breadcrumb -->
+<div class="breadcrumb-bar">
+    <div class="container-fluid">
+        <div class="row align-items-center">
+            <div class="col-md-12 col-12">
+                <h2 class="breadcrumb-title">Patient Dashboard</h2>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Breadcrumb -->
+
+<!-- Page Content -->
+<div class="content">
+    <div class="container-fluid">
+
+        <div class="row">
+
+            <!-- Profile Sidebar -->
+            <div class="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
+                <app-patient-sidebar></app-patient-sidebar>
+            </div>
+            <!-- / Profile Sidebar -->
+            <div class="col-md-7 col-lg-8 col-xl-9">
+                <div class="card">
+                    <div class="card-body pt-0">
+
+                        <!-- Tab Menu -->
+                        <nav class="user-tabs mb-4">
+                            <ul class="nav nav-tabs nav-tabs-bottom nav-justified">
+                                <li class="nav-item">
+                                    <a class="nav-link active" href="#pat_appointments" data-toggle="tab"
+                                        (click)="checkTabValue('appointment')">Appointments</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#pat_prescriptions" data-toggle="tab"
+                                        (click)="checkTabValue('prescription')">Prescriptions</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#pat_medical_records" data-toggle="tab"
+                                        (click)="checkTabValue('booking')">Medical Records</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#pat_billing" data-toggle="tab"
+                                        (click)="checkTabValue('invoice')">Billing</a>
+                                </li>
+                            </ul>
+                        </nav>
+                        <!-- /Tab Menu -->
+
+                        <!-- Tab Content -->
+                        <div class="tab-content pt-0">
+
+                            <!-- Appointment Tab -->
+                            <div id="pat_appointments" class="tab-pane fade show active">
+                                <div class="card card-table mb-0">
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <table class="table table-hover table-center mb-0">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Doctor</th>
+                                                        <th>Appt Date</th>
+                                                        <th>Booking Date</th>
+                                                        <th>Amount</th>
+                                                        <th class="text-center">Status</th>
+                                                        <th class="text-center">Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr
+                                                        *ngFor="let list of dashboardData | paginate: { itemsPerPage: perPage, currentPage: currentPage, totalItems: total, id: 'first' }, let i = index;">
+                                                        <td>
+                                                            <h2 class="table-avatar">
+                                                                <a href="javascript:void(0);"
+                                                                    class="avatar avatar-sm mr-2">
+                                                                    <img class="avatar-img rounded-circle"
+                                                                        src="{{ list?.doctorImage }}" alt="User Image">
+                                                                </a>
+                                                                <a href="javascript:void(0);">{{ list.name }}
+                                                                    <span>{{ list.dentistType }} <p class="reschedule"
+                                                                            *ngIf="list.isReallocate"><i
+                                                                                class="fa fa-registered"></i></p>
+                                                                    </span></a>
+                                                            </h2>
+                                                        </td>
+                                                        <td>{{ list.appointmentDate | date:'dd MMM yyyy' }}<span
+                                                                class="d-block text-info">{{ list.appointmentTime
+                                                                }}</span>
+                                                        </td>
+                                                        <td>{{ list.bookingDate | date:'dd MMM yyyy' }}</td>
+                                                        <td>₹{{ list.paidAmount }}</td>
+                                                        <td class="text-center">
+                                                            <span class="badge badge-pill bg-success-light"
+                                                                *ngIf="list.currentStatus === 'Completed'">Completed</span>
+                                                            <span class="badge badge-pill bg-danger-light cur-pointer"
+                                                                *ngIf="list.currentStatus === 'Reallocate'"
+                                                                routerLink="/patient-panel/reschedule-appointment/{{ list.doctorId }}/{{ list._id }}">Rescheduled</span>
+                                                            <span class="badge badge-pill bg-danger-light"
+                                                                *ngIf="list.currentStatus === 'Pending'">Pending</span>
+                                                            <span class="badge badge-pill bg-confirm-light"
+                                                                *ngIf="list.currentStatus === 'Accept'">Confirmed</span>
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <div class="table-action">
+                                                                <a href="javascript:void(0);" id="{{list._id}}"
+                                                                    (click)="individualAppointmentDetails(list._id)"
+                                                                    class="btn btn-sm bg-info-light" data-toggle="modal"
+                                                                    data-target="#dash_details">
+                                                                    <i class="far fa-eye"></i> View
+                                                                </a>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr *ngIf="dashboardData.length === 0">
+                                                        <td class="text-center" colspan="6">
+                                                            <h3>Appointments not found</h3>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="row result-str" *ngIf="total !== 0">
+                                            <div class="col-sm-12 col-md-5 ">
+                                                <p> {{ (currentPage-1) * perPage + 1 }} to {{ math.min((currentPage
+                                                    * perPage), total) }} of {{ total }} entries </p>
+                                            </div>
+                                            <div class="col-sm-12 col-md-7 text-right">
+                                                <pagination-controls [directionLinks]="directionLinks"
+                                                    [autoHide]="autoHide" [responsive]="responsive"
+                                                    [previousLabel]="labels.previousLabel"
+                                                    [nextLabel]="labels.nextLabel" (pageChange)="onPageChange($event)"
+                                                    id="first">
+                                                </pagination-controls>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /Appointment Tab -->
+
+                            <!-- Prescription Tab -->
+                            <div class="tab-pane fade" id="pat_prescriptions">
+                                <div class="card card-table mb-0">
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <table class="table table-hover table-center mb-0">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Appt Date </th>
+                                                        <th>Name</th>
+                                                        <th>Created by </th>
+                                                        <th></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr
+                                                        *ngFor="let list of dashboardData | paginate: { itemsPerPage: perPage, currentPage: currentPage, totalItems: total, id: 'second' }, let i = index;">
+                                                        <td>{{list?.createdAt | date:'dd MMM yyyy'}}</td>
+                                                        <td>Prescription {{i + 1}}</td>
+                                                        <td>
+                                                            <h2 class="table-avatar">
+                                                                <a href="javascript:void(0);"
+                                                                    class="avatar avatar-sm mr-2">
+                                                                    <img class="avatar-img rounded-circle"
+                                                                        src="{{list?.doctorImage}}" alt="User Image">
+                                                                </a>
+                                                                <a href="javascript:void(0);">{{list?.name}}
+                                                                    <span>{{list?.dentistType}}</span></a>
+                                                            </h2>
+                                                        </td>
+                                                        <td class="text-right">
+                                                            <div class="table-action">
+                                                                <a href="javascript:void(0);" id="{{list._id}}_view"
+                                                                    (click)="prescriptionDetailsView(list._id)"
+                                                                    class="btn btn-sm bg-info-light" data-toggle="modal"
+                                                                    data-target="#pres_details">
+                                                                    <i class="far fa-eye"></i> View
+                                                                </a>
+                                                                <a href="javascript:void(0);" id="{{list._id}}_print"
+                                                                    (click)="prescriptionDetailsView(list._id)"
+                                                                    class="btn btn-sm bg-primary-light"
+                                                                    data-toggle="modal"
+                                                                    data-target="#pres_print_details">
+                                                                    <i class="far fa-eye"></i> Print
+                                                                </a>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="row result-str" *ngIf="total !== 0">
+                                            <div class="col-sm-12 col-md-5 ">
+                                                <p> {{ (currentPage-1) * perPage + 1 }} to {{ math.min((currentPage
+                                                    * perPage), total) }} of {{ total }} entries </p>
+                                            </div>
+                                            <div class="col-sm-12 col-md-7 text-right">
+                                                <pagination-controls [directionLinks]="directionLinks"
+                                                    [autoHide]="autoHide" [responsive]="responsive"
+                                                    [previousLabel]="labels.previousLabel"
+                                                    [nextLabel]="labels.nextLabel" (pageChange)="onPageChange($event)"
+                                                    id="second">
+                                                </pagination-controls>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /Prescription Tab -->
+
+                            <!-- Medical Records Tab -->
+                            <div id="pat_medical_records" class="tab-pane fade">
+                                <div class="card card-table mb-0">
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <table class="table table-hover table-center mb-0">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Appt ID</th>
+                                                        <th>Date </th>
+                                                        <th>Service Type</th>
+                                                        <th>Created</th>
+                                                        <th></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr
+                                                        *ngFor="let list of dashboardData | paginate: { itemsPerPage: perPage, currentPage: currentPage, totalItems: total, id: 'fourth' }, let i = index;">
+                                                        <td><a href="javascript:void(0);">#{{list?.appointmentId}}</a>
+                                                        </td>
+                                                        <td>{{list?.createdAt | date: 'dd MMM yyy'}}</td>
+                                                        <td>{{list?.serviceType}}</td>
+                                                        <td>
+                                                            <h2 class="table-avatar">
+                                                                <a href="javascript:void(0);"
+                                                                    class="avatar avatar-sm mr-2">
+                                                                    <img class="avatar-img rounded-circle"
+                                                                        src="{{list?.doctorImage}}" alt="User Image">
+                                                                </a>
+                                                                <a href="javascript:void(0);">{{list?.name}}
+                                                                    <span>{{list?.dentistType}}</span></a>
+                                                            </h2>
+                                                        </td>
+                                                        <td class="text-right">
+                                                            <div class="table-action">
+                                                                <a href="javascript:void(0);" id="{{list._id}}_view"
+                                                                    (click)="prescriptionDetailsView(list._id)"
+                                                                    class="btn btn-sm bg-info-light" data-toggle="modal"
+                                                                    data-target="#med_view_details">
+                                                                    <i class="far fa-eye"></i> View
+                                                                </a>
+                                                                <!-- <a href="javascript:void(0);" class="btn btn-sm bg-primary-light">
+																				<i class="fas fa-print"></i> Print
+																			</a> -->
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="row result-str" *ngIf="total !== 0">
+                                            <div class="col-sm-12 col-md-5 ">
+                                                <p> {{ (currentPage-1) * perPage + 1 }} to {{ math.min((currentPage
+                                                    * perPage), total) }} of {{ total }} entries </p>
+                                            </div>
+                                            <div class="col-sm-12 col-md-7 text-right">
+                                                <pagination-controls [directionLinks]="directionLinks"
+                                                    [autoHide]="autoHide" [responsive]="responsive"
+                                                    [previousLabel]="labels.previousLabel"
+                                                    [nextLabel]="labels.nextLabel" (pageChange)="onPageChange($event)"
+                                                    id="fourth">
+                                                </pagination-controls>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /Medical Records Tab -->
+
+                            <!-- Billing Tab -->
+                            <div id="pat_billing" class="tab-pane fade">
+                                <div class="card card-table mb-0">
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <table class="table table-hover table-center mb-0">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Invoice No</th>
+                                                        <th>Doctor</th>
+                                                        <th>Amount</th>
+                                                        <th>Paid On</th>
+                                                        <th></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr
+                                                        *ngFor="let list of dashboardData | paginate: { itemsPerPage: perPage, currentPage: currentPage, totalItems: total, id: 'third' }, let i = index;">
+                                                        <td>
+                                                            <a href="javascript:void(0);">#{{list?.invoiceId}}</a>
+                                                        </td>
+                                                        <td>
+                                                            <h2 class="table-avatar">
+                                                                <a href="javascript:void(0);"
+                                                                    class="avatar avatar-sm mr-2">
+                                                                    <img class="avatar-img rounded-circle"
+                                                                        src="{{list?.doctorImage}}" alt="User Image">
+                                                                </a>
+                                                                <a href="javascript:void(0);">{{list?.name}}
+                                                                    <span>{{list?.dentistType}}</span></a>
+                                                            </h2>
+                                                        </td>
+                                                        <td>₹{{list?.paidAmount}}</td>
+                                                        <td>{{list?.paymentDate | date: 'dd MMM yyyy'}}</td>
+                                                        <td class="text-right">
+                                                            <div class="table-action">
+                                                                <a href="javascript:void(0);" id="{{list._id}}_view"
+                                                                    (click)="prescriptionDetailsView(list._id)"
+                                                                    class="btn btn-sm bg-info-light" data-toggle="modal"
+                                                                    data-target="#inv_view_details">
+                                                                    <i class="far fa-eye"></i> View
+                                                                </a>
+                                                                <!-- <a href="javascript:void(0);" id="{{list._id}}_print" (click)="prescriptionDetailsView(list._id)" class="btn btn-sm bg-primary-light" data-toggle="modal" data-target="#pres_print_details">
+                                                                    <i class="far fa-eye"></i> Print
+                                                                </a> -->
+                                                                <a href="javascript:void(0);"
+                                                                    class="btn btn-sm bg-primary-light"
+                                                                    (click)="invoicePrint(list?.pdfId)">
+                                                                    <i class="fas fa-print"></i> Print
+                                                                </a>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="row result-str" *ngIf="total !== 0">
+                                            <div class="col-sm-12 col-md-5 ">
+                                                <p> {{ (currentPage-1) * perPage + 1 }} to {{ math.min((currentPage
+                                                    * perPage), total) }} of {{ total }} entries </p>
+                                            </div>
+                                            <div class="col-sm-12 col-md-7 text-right">
+                                                <pagination-controls [directionLinks]="directionLinks"
+                                                    [autoHide]="autoHide" [responsive]="responsive"
+                                                    [previousLabel]="labels.previousLabel"
+                                                    [nextLabel]="labels.nextLabel" (pageChange)="onPageChange($event)"
+                                                    id="third">
+                                                </pagination-controls>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /Billing Tab -->
+
+                        </div>
+                        <!-- Tab Content -->
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+<!-- /Page Content -->
+
+
+<!-- Appointment Details Modal -->
+<div class="modal fade custom-modal" id="dash_details">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Appointment Details</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <ul class="info-details">
+                    <li>
+                        <div class="details-header">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <span class="title">#{{individualDetails?.appointmentId}}</span>
+                                    <span class="text">{{individualDetails?.appointmentDate | date: 'dd MMM yyyy'}}
+                                        {{individualDetails?.appointmentTime}}</span>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="text-right">
+                                        <button *ngIf="individualDetails?.currentStatus === 'Accept' " type="button"
+                                            disabled class="btn bg-confirm-light btn-sm"
+                                            id="topup_status">Confirmed</button>
+                                        <button *ngIf="individualDetails?.currentStatus === 'Completed' " type="button"
+                                            disabled class="btn bg-success-light btn-sm"
+                                            id="topup_status">Completed</button>
+                                        <button *ngIf="individualDetails?.currentStatus === 'Reallocate' " type="button"
+                                            disabled class="btn btn-sm bg-danger-light"
+                                            id="topup_status">ReSchedule</button>
+                                        <button *ngIf="individualDetails?.currentStatus === 'Pending' " type="button"
+                                            disabled class="btn btn-sm bg-danger-light"
+                                            id="topup_status">Pending</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="title">Status:</span>
+                        <span class="text" *ngIf="individualDetails?.currentStatus === 'Accept' ">Confirmed</span>
+                        <span class="text" *ngIf="individualDetails?.currentStatus === 'Completed' ">Completed</span>
+                        <span class="text" *ngIf="individualDetails?.currentStatus === 'Reallocate' ">ReSchedule</span>
+                        <span class="text" *ngIf="individualDetails?.currentStatus === 'Pending' ">Pending</span>
+                    </li>
+                    <li>
+                        <span class="title">Status Date:</span>
+                        <span class="text">{{individualDetails?.statusDate | date: 'dd MMM yyyy'}}</span>
+                    </li>
+                    <li>
+                        <span class="title">Paid Amount</span>
+                        <span class="text">₹{{individualDetails?.paid}}</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Appointment Details Modal -->
+
+<!-- Prescription View Details Modal -->
+<div class="modal fade custom-modal" id="pres_details">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Appointment Prescription Details</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <ul class="info-details">
+                    <li>
+                        <div class="details-header">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <span class="title">#{{prescriptionDetails?.appointmentId}}</span>
+                                    <span class="text">{{prescriptionDetails?.appointmentDate | date: 'dd MMM yyyy'}}
+                                        {{prescriptionDetails?.appointmentTime}}</span>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="text-right">
+                                        <button *ngIf="prescriptionDetails?.currentStatus === 'Accept' " type="button"
+                                            disabled class="btn bg-confirm-light btn-sm"
+                                            id="topup_status">Confirmed</button>
+                                        <button *ngIf="prescriptionDetails?.currentStatus === 'Completed' "
+                                            type="button" disabled class="btn bg-success-light btn-sm"
+                                            id="topup_status">Completed</button>
+                                        <button *ngIf="prescriptionDetails?.currentStatus === 'Reallocate' "
+                                            type="button" disabled class="btn btn-sm bg-danger-light"
+                                            id="topup_status">ReSchedule</button>
+                                        <button *ngIf="prescriptionDetails?.currentStatus === 'Pending' " type="button"
+                                            disabled class="btn btn-sm bg-danger-light"
+                                            id="topup_status">Pending</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="title">Status:</span>
+                        <span class="text" *ngIf="prescriptionDetails?.currentStatus === 'Accept' ">Confirmed</span>
+                        <span class="text" *ngIf="prescriptionDetails?.currentStatus === 'Completed' ">Completed</span>
+                        <span class="text"
+                            *ngIf="prescriptionDetails?.currentStatus === 'Reallocate' ">ReSchedule</span>
+                        <span class="text" *ngIf="prescriptionDetails?.currentStatus === 'Pending' ">Pending</span>
+                    </li>
+                    <li>
+                        <span class="title">Status Date:</span>
+                        <span class="text">{{prescriptionDetails?.statusDate | date: 'dd MMM yyyy'}}</span>
+                    </li>
+                    <li>
+                        <span class="title">Suggestions</span>
+                        <span class="text">{{prescriptionDetails?.prescriptionTxt}}</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Prescription View Details Modal -->
+
+<!-- Prescription Print Details Modal -->
+<div class="modal fade custom-modal" id="pres_print_details">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Appointment Prescription Details</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <ul class="info-details">
+                    <li>
+                        <div class="details-header">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <span class="title">#{{prescriptionDetails?.appointmentId}}</span>
+                                    <span class="text">{{prescriptionDetails?.appointmentDate | date: 'dd MMM yyyy'}}
+                                        {{prescriptionDetails?.appointmentTime}}</span>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="text-right">
+                                        <button *ngIf="prescriptionDetails?.currentStatus === 'Accept' " type="button"
+                                            disabled class="btn bg-confirm-light btn-sm"
+                                            id="topup_status">Confirmed</button>
+                                        <button *ngIf="prescriptionDetails?.currentStatus === 'Completed' "
+                                            type="button" disabled class="btn bg-success-light btn-sm"
+                                            id="topup_status">Completed</button>
+                                        <button *ngIf="prescriptionDetails?.currentStatus === 'Reallocate' "
+                                            type="button" disabled class="btn btn-sm bg-danger-light"
+                                            id="topup_status">ReSchedule</button>
+                                        <button *ngIf="prescriptionDetails?.currentStatus === 'Pending' " type="button"
+                                            disabled class="btn btn-sm bg-danger-light"
+                                            id="topup_status">Pending</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="title">Status:</span>
+                        <span class="text" *ngIf="prescriptionDetails?.currentStatus === 'Accept' ">Confirmed</span>
+                        <span class="text" *ngIf="prescriptionDetails?.currentStatus === 'Completed' ">Completed</span>
+                        <span class="text"
+                            *ngIf="prescriptionDetails?.currentStatus === 'Reallocate' ">ReSchedule</span>
+                        <span class="text" *ngIf="prescriptionDetails?.currentStatus === 'Pending' ">Pending</span>
+                    </li>
+                    <li>
+                        <span class="title">Status Date:</span>
+                        <span class="text">{{prescriptionDetails?.statusDate | date: 'dd MMM yyyy'}}</span>
+                    </li>
+                    <li>
+                        <span class="title">Attachments</span>
+                        <span *ngFor="let attachment of prescriptionDetails?.prescriptionAttach; let i = index;"
+                            class="text">
+                            <a href="{{attachment}}" target="_blank"> Prescription {{i+1}}
+                            </a>
+                        </span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Prescription Print Details Modal -->
+
+<!-- Invoice View Details Modal -->
+<div class="modal fade custom-modal" id="inv_view_details">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Appointment Billing Details</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <ul class="info-details">
+                    <li>
+                        <div class="details-header">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <span class="title">#{{prescriptionDetails?.appointmentId}}</span>
+                                    <span class="text">{{prescriptionDetails?.appointmentDate | date: 'dd MMM yyyy'}}
+                                        {{prescriptionDetails?.appointmentTime}}</span>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="text-right">
+                                        <button *ngIf="prescriptionDetails?.currentStatus === 'Accept' " type="button"
+                                            disabled class="btn bg-confirm-light btn-sm"
+                                            id="topup_status">Confirmed</button>
+                                        <button *ngIf="prescriptionDetails?.currentStatus === 'Completed' "
+                                            type="button" disabled class="btn bg-success-light btn-sm"
+                                            id="topup_status">Completed</button>
+                                        <button *ngIf="prescriptionDetails?.currentStatus === 'Reallocate' "
+                                            type="button" disabled class="btn btn-sm bg-danger-light"
+                                            id="topup_status">ReSchedule</button>
+                                        <button *ngIf="prescriptionDetails?.currentStatus === 'Pending' " type="button"
+                                            disabled class="btn btn-sm bg-danger-light"
+                                            id="topup_status">Pending</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="title">Status:</span>
+                        <span class="text" *ngIf="prescriptionDetails?.currentStatus === 'Accept' ">Confirmed</span>
+                        <span class="text" *ngIf="prescriptionDetails?.currentStatus === 'Completed' ">Completed</span>
+                        <span class="text"
+                            *ngIf="prescriptionDetails?.currentStatus === 'Reallocate' ">ReSchedule</span>
+                        <span class="text" *ngIf="prescriptionDetails?.currentStatus === 'Pending' ">Pending</span>
+                    </li>
+                    <li>
+                        <span class="title">Status Date:</span>
+                        <span class="text">{{prescriptionDetails?.statusDate | date: 'dd MMM yyyy'}}</span>
+                    </li>
+                    <li>
+                        <span class="title">Paid Amount</span>
+                        <span class="text">₹{{prescriptionDetails?.paid}}</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Invoice View Details Modal -->
+
+<!-- Medical View Details Modal -->
+<div class="modal fade custom-modal" id="med_view_details">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Medical Details</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <ul class="info-details">
+                    <li>
+                        <div class="details-header">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <span class="title">#{{prescriptionDetails?.appointmentId}}</span>
+                                    <span class="text">{{prescriptionDetails?.appointmentDate | date: 'dd MMM yyyy'}}
+                                        {{prescriptionDetails?.appointmentTime}}</span>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="text-right">
+                                        <button *ngIf="prescriptionDetails?.currentStatus === 'Accept' " type="button"
+                                            disabled class="btn bg-confirm-light btn-sm"
+                                            id="topup_status">Confirmed</button>
+                                        <button *ngIf="prescriptionDetails?.currentStatus === 'Completed' "
+                                            type="button" disabled class="btn bg-success-light btn-sm"
+                                            id="topup_status">Completed</button>
+                                        <button *ngIf="prescriptionDetails?.currentStatus === 'Reallocate' "
+                                            type="button" disabled class="btn btn-sm bg-danger-light"
+                                            id="topup_status">ReSchedule</button>
+                                        <button *ngIf="prescriptionDetails?.currentStatus === 'Pending' " type="button"
+                                            disabled class="btn btn-sm bg-danger-light"
+                                            id="topup_status">Pending</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="title">Status:</span>
+                        <span class="text" *ngIf="prescriptionDetails?.currentStatus === 'Accept' ">Confirmed</span>
+                        <span class="text" *ngIf="prescriptionDetails?.currentStatus === 'Completed' ">Completed</span>
+                        <span class="text"
+                            *ngIf="prescriptionDetails?.currentStatus === 'Reallocate' ">ReSchedule</span>
+                        <span class="text" *ngIf="prescriptionDetails?.currentStatus === 'Pending' ">Pending</span>
+                    </li>
+                    <li>
+                        <span class="title">Status Date:</span>
+                        <span class="text">{{prescriptionDetails?.statusDate | date: 'dd MMM yyyy'}}</span>
+                    </li>
+                    <li>
+                        <span class="title">Service Type</span>
+                        <span class="text">{{prescriptionDetails?.serviceType}}</span>
+                    </li>
+                    <li>
+                        <span class="title">Description</span>
+                        <span class="text">{{prescriptionDetails?.description}}</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Medical View Details Modal -->
+
+

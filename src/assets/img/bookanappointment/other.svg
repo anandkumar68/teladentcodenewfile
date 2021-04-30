@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="33.302" height="41.628" viewBox="0 0 33.302 41.628">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+      }
+
+      .cls-2 {
+        fill: #d4f4fe;
+      }
+
+      .cls-3 {
+        fill: #4da5db;
+      }
+    </style>
+  </defs>
+  <g id="file" transform="translate(-64 -16)">
+    <path id="Path_2309" data-name="Path 2309" class="cls-1" d="M101.14,64.24H74.775A2.775,2.775,0,0,1,72,61.465V26.775A2.775,2.775,0,0,1,74.775,24H95.589l8.326,8.326v29.14A2.775,2.775,0,0,1,101.14,64.24Z" transform="translate(-7.306 -7.306)"/>
+    <g id="Group_4920" data-name="Group 4920" transform="translate(73.676 16.694)">
+      <ellipse id="Ellipse_221" data-name="Ellipse 221" class="cls-2" cx="1" cy="2" rx="1" ry="2" transform="translate(0.324 18.306)"/>
+      <ellipse id="Ellipse_222" data-name="Ellipse 222" class="cls-2" cx="1.5" cy="2" rx="1.5" ry="2" transform="translate(5.324 18.306)"/>
+      <ellipse id="Ellipse_223" data-name="Ellipse 223" class="cls-2" cx="1" cy="2" rx="1" ry="2" transform="translate(11.324 18.306)"/>
+      <path id="Path_2310" data-name="Path 2310" class="cls-2" d="M352.326,32.326h-5.55A2.775,2.775,0,0,1,344,29.55V24Z" transform="translate(-329.393 -24)"/>
+    </g>
+    <path id="Path_2311" data-name="Path 2311" class="cls-3" d="M88.283,16H67.469A3.473,3.473,0,0,0,64,19.469v34.69a3.473,3.473,0,0,0,3.469,3.469H93.833A3.473,3.473,0,0,0,97.3,54.159V25.019a.694.694,0,0,0-.2-.491L88.774,16.2A.694.694,0,0,0,88.283,16Zm7.632,38.159a2.084,2.084,0,0,1-2.081,2.081H67.469a2.084,2.084,0,0,1-2.081-2.081V19.469a2.084,2.084,0,0,1,2.081-2.081h20.12v4.857a3.473,3.473,0,0,0,3.469,3.469h4.857Zm-6.938-35.79,5.957,5.957H91.058a2.084,2.084,0,0,1-2.081-2.081Z"/>
+    <path id="Path_2312" data-name="Path 2312" class="cls-3" d="M170.081,232a2.081,2.081,0,1,0,2.081,2.081A2.081,2.081,0,0,0,170.081,232Zm0,2.775a.694.694,0,1,1,.694-.694A.694.694,0,0,1,170.081,234.775Z" transform="translate(-94.981 -197.267)"/>
+    <path id="Path_2313" data-name="Path 2313" class="cls-3" d="M234.081,232a2.081,2.081,0,1,0,2.081,2.081A2.081,2.081,0,0,0,234.081,232Zm0,2.775a.694.694,0,1,1,.694-.694A.694.694,0,0,1,234.081,234.775Z" transform="translate(-153.43 -197.267)"/>
+    <path id="Path_2314" data-name="Path 2314" class="cls-3" d="M298.081,232a2.081,2.081,0,1,0,2.081,2.081A2.081,2.081,0,0,0,298.081,232Zm0,2.775a.694.694,0,1,1,.694-.694A.694.694,0,0,1,298.081,234.775Z" transform="translate(-211.88 -197.267)"/>
+  </g>
+</svg>

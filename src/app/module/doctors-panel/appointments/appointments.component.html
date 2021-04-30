@@ -1,0 +1,238 @@
+<ngx-ui-loader [loaderId]="'loader-02'"></ngx-ui-loader>
+<!-- Breadcrumb -->
+<div class="breadcrumb-bar">
+    <div class="container-fluid">
+        <div class="row align-items-center">
+            <div class="col-md-3 col-12">
+                <h2 class="breadcrumb-title">Appointments</h2>
+            </div>
+            <div class="col-md-4 col-12 d-md-block d-none">
+                <div class="sort-by">
+                    <span class="sort-title">Filter by</span>
+                    <span class="sortby-fliter">
+                        <select class="select form-control filter" id="status" (change)="statusChange($event.target.value)">
+                            <option class="All" value="all">All</option>
+                            <option class="Pending" value="pending">Pending</option>
+                            <option class="Completed" value="completed">Completed</option>
+                            <option class="Confirmed" value="confirm">Confirmed</option>
+                            <option class="ReScheduled" value="reschedule">ReScheduled</option>
+                        </select>
+                    </span>
+                </div>
+            </div>
+            <div class="col-md-3 col-12">
+                <input type="text" placeholder="Select range" class="form-control filter" id="date" [maxDate]="maxDateType"
+                    (bsValueChange)="rangeDatesUpdated($event)"
+                    [bsConfig]="{rangeInputFormat: 'DD-MM-YYYY',  dateInputFormat: 'DD-MM-YYYY', isAnimated:'true', showWeekNumbers: false,containerClass:'theme-blue' }"
+                    bsDaterangepicker>
+            </div>
+            <div class="col-md-2 col-12">
+                <i class="fa fa-sync" data-toggle="tooltip" data-placement="top" title="Reset" (click)="reset()"></i>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Breadcrumb -->
+
+<!-- Page Content -->
+<div class="content">
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
+
+                <!-- PROFILE SIDEBAR -->
+                <app-doctor-sidebar></app-doctor-sidebar>
+                <!-- PROFILE SIDEBAR -->
+
+            </div>
+
+            <div class="col-md-7 col-lg-8 col-xl-9">
+
+                <div class="appointments">
+
+
+                    <!-- Appointment List -->
+                    <div class="appointment-list"
+                        *ngFor="let list of appointmentList |  paginate: { itemsPerPage: perPage, currentPage: currentPage, totalItems: total }, let i = index;">
+                        <div class="profile-info-widget">
+                            <a href="javascript:void(0);" class="booking-doc-img">
+                                <img src="{{ list.imageUrl }}" alt="User Image">
+                            </a>
+                            <div class="profile-det-info">
+                                <h3><a href="javascript:void(0);">{{ list.name }}</a></h3>
+                                <div class="patient-details">
+                                    <h5><i class="far fa-clock"></i>{{ list.appointmentDate | date:'dd-MM-yyyy' }}, {{
+                                        list.appointmentTime }}</h5>
+                                    <h5><i class="fas fa-map-marker-alt"></i> {{ list.city }}, {{ list.state }}</h5>
+                                    <h5><i class="fas fa-envelope"></i> {{ list.notifyEmail }}</h5>
+                                    <h5 class="mb-0"><i class="fas fa-phone"></i>+{{ list.countryCode }} {{ list.phone
+                                        }}</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="appointment-action">
+                            <a href="javascript:void(0);" id="{{list._id}}"
+                                (click)="individualAppointmentDetails(list._id)" class="btn btn-sm bg-info-light"
+                                data-toggle="modal" data-target="#appt_details">
+                                <i class="far fa-eye"></i> View
+                            </a>
+                            <a *ngIf="list.currentStatus === 'Pending' " href="javascript:void(0);"
+                                (click)="updateStatus('accept', list._id)" class="btn btn-sm bg-success-light">
+                                <i class="fas fa-check"></i> Confirm
+                            </a>
+                            <a *ngIf="list.currentStatus === 'Accept' " href="javascript:void(0);"
+                                class="btn btn-sm bg-success-light" (click)="completeRequest(list._id)"
+                                data-toggle="modal" data-target="#appt_comp_details" data-backdrop="static">
+                                <i class="fas fa-check"></i> Completed
+                            </a>
+                            <a *ngIf="list.currentStatus === 'Accept' " (click)="updateStatus('reallocate', list._id)"
+                                href="javascript:void(0);" class="btn btn-sm bg-danger-light">
+                                <i class="fas fa-times"></i> ReSchedule
+                            </a>
+                        </div>
+                    </div>
+                    <div class="no_appointment" *ngIf="total === 0">
+                        <h3 class="text-center">Appointments not found</h3>
+                    </div>
+                    <!-- /Appointment List -->
+                </div>
+
+                <div class="row result-str" *ngIf="total !== 0">
+                    <div class="col-sm-12 col-md-5 ">
+                        <p> {{ (currentPage-1) * perPage + 1 }} to {{ math.min((currentPage
+                            * perPage), total) }} of {{ total }} entries </p>
+                    </div>
+                    <div class="col-sm-12 col-md-7 text-right">
+                        <pagination-controls [directionLinks]="directionLinks" [autoHide]="autoHide"
+                            [responsive]="responsive" [previousLabel]="labels.previousLabel"
+                            [nextLabel]="labels.nextLabel" (pageChange)="onPageChange($event)">
+                        </pagination-controls>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+<!-- /Page Content -->
+
+
+<!-- Appointment Details Modal -->
+<div class="modal fade custom-modal" id="appt_details">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Appointment Details</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <ul class="info-details">
+                    <li>
+                        <div class="details-header">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <span class="title">#{{individualDetails?.appointmentId}}</span>
+                                    <span class="text">{{individualDetails?.appointmentDate | date: 'dd MMM yyyy'}}
+                                        {{individualDetails?.appointmentTime}}</span>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="text-right">
+                                        <button *ngIf="individualDetails?.currentStatus === 'Accept' " type="button"
+                                            disabled class="btn bg-success-light btn-sm"
+                                            id="topup_status">Confirm</button>
+                                        <button *ngIf="individualDetails?.currentStatus === 'Completed' " type="button"
+                                            disabled class="btn bg-success-light btn-sm"
+                                            id="topup_status">Completed</button>
+                                        <button *ngIf="individualDetails?.currentStatus === 'Reallocate' " type="button"
+                                            disabled class="btn btn-sm bg-danger-light"
+                                            id="topup_status">ReSchedule</button>
+                                        <button *ngIf="individualDetails?.currentStatus === 'Pending' " type="button"
+                                            disabled class="btn btn-sm bg-danger-light"
+                                            id="topup_status">Pending</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="title">Status:</span>
+                        <span class="text" *ngIf="individualDetails?.currentStatus === 'Accept' ">Confirm</span>
+                        <span class="text" *ngIf="individualDetails?.currentStatus === 'Completed' ">Completed</span>
+                        <span class="text" *ngIf="individualDetails?.currentStatus === 'Reallocate' ">ReSchedule</span>
+                        <span class="text" *ngIf="individualDetails?.currentStatus === 'Pending' ">Pending</span>
+                    </li>
+                    <li>
+                        <span class="title">Status Date:</span>
+                        <span class="text">{{individualDetails?.statusDate | date: 'dd MMM yyyy'}}</span>
+                    </li>
+                    <li>
+                        <span class="title">Paid Amount</span>
+                        <span class="text">₹{{individualDetails?.paid}}</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Appointment Details Modal -->
+
+<!-- Complete Appointment Details Modal -->
+<div class="modal fade custom-modal" id="appt_comp_details">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Appointment Details</h5>
+                <button type="button" id="closeApp" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="completeForm" (ngSubmit)="submitCompleteRequest()">
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Description <span
+                                class="text-danger">*</span></label>
+                        <textarea [ngClass]="completeValidation.description.errors ? 'is-invalid' : ''"
+                            class="form-control" id="descArea" cols="10" rows="5"
+                            formControlName="description"></textarea>
+                        <div *ngIf="completeValidation.description.errors" class="invalid-feedback">
+                            <div *ngIf="completeValidation.description.errors.required">Description is Mandatory</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="message-text" class="col-form-label"> Prescription (R<sub>x</sub>) <span
+                                class="text-danger">*</span></label>
+                        <textarea [ngClass]="completeValidation.suggestion.errors ? 'is-invalid' : ''"
+                            class="form-control" id="drug_suggestion" cols="10" rows="5"
+                            formControlName="suggestion"></textarea>
+                        <div *ngIf="completeValidation.suggestion.errors" class="invalid-feedback">
+                            <div *ngIf="completeValidation.suggestion.errors.required">Prescription is Mandatory</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div *ngFor='let url of urls, let i = index;' class="column container">
+                                <img [src]="url" style="width:100%" />
+                                <p class="mod_title">R<sub>x</sub></p>
+                                <div class="mod_overlay"></div>
+                                <div class="mod_button"><a href="javascript:void(0);" (click)=removePhoto(i)> REMOVE
+                                    </a></div>
+                            </div>
+                        </div>
+                        <div class="field-wrap">
+                            <input class="form-control" id="fileChosen" type='file' accept=".png, .jpg, .jpeg, .gif"
+                                (change)="onSelectFile($event)" multiple>
+                        </div>
+                    </div>
+
+                    <button [disabled]='completeForm.invalid' type="submit"
+                        class="btn btn-primary submit-btn">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Complete Appointment Details Modal -->

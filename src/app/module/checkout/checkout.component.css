@@ -1,0 +1,9 @@
+.disabled {
+    background-color: #98e0cd;
+    cursor: none;
+    pointer-events: none;
+}
+
+.error-msg {
+    color: brown;
+}

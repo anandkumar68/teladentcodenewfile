@@ -1,0 +1,561 @@
+<ngx-ui-loader [loaderId]="'loader-02'"></ngx-ui-loader>
+
+
+<!-- Breadcrumb -->
+<div class="breadcrumb-bar">
+    <div class="container-fluid">
+        <div class="row align-items-center">
+            <div class="col-md-12 col-12">
+                <h2 class="breadcrumb-title">Profile Settings</h2>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Breadcrumb -->
+
+<!-- Page Content -->
+<div class="content">
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
+            
+                <!-- PROFILE SIDEBAR -->
+                <app-doctor-sidebar></app-doctor-sidebar>
+                <!-- PROFILE SIDEBAR -->
+                
+            </div>
+            <div class="col-md-7 col-lg-8 col-xl-9">
+                <form [formGroup]="addDoctorForm">
+                <!-- Basic Information -->
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Basic Information</h4>
+                        <div class="row form-row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <div class="change-avatar">
+                                        <div class="profile-img">
+                                            <img src="{{imageUrl}}" alt="User Image">
+                                        </div>
+                                        <div class="upload-img">
+                                            <div class="change-photo-btn">
+                                                <span><i class="fa fa-upload"></i> Upload Photo</span>
+                                                <input type='file' class="upload" id="imageUpload" accept=".png, .jpg, .jpeg" (change)="onSelectFile($event)" />
+                                            </div>
+                                            <small class="form-text text-muted">Allowed JPG, GIF or PNG. Max size of 2MB</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>First Name <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control"
+                                        [ngClass]="submitted && validation.firstName.errors ? 'is-invalid' : ''"
+                                        formControlName="firstName">
+                                    <div *ngIf="submitted && validation.firstName.errors" class="invalid-feedback">
+                                        <div *ngIf="validation.firstName.errors.required">First Name is Mandatory
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Last Name <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control"
+                                        [ngClass]="submitted && validation.lastName.errors ? 'is-invalid' : ''"
+                                        formControlName="lastName">
+                                    <div *ngIf="submitted && validation.lastName.errors" class="invalid-feedback">
+                                        <div *ngIf="validation.lastName.errors.required">Last Name is Mandatory
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Phone Number <span class="text-danger">*</span></label>
+                                    <ngx-intl-tel-input
+                                        [cssClass]="submitted && validation.phone.errors ? 'form-control is-invalid' : 'form-control'"
+                                        [enableAutoCountrySelect]="false" [enablePlaceholder]="true"
+                                        [searchCountryFlag]="true"
+                                        [searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name, SearchCountryField.DialCode]"
+                                        [selectFirstCountry]="false" [selectedCountryISO]="setCountry"
+                                        [tooltipField]="TooltipLabel.Name" [phoneValidation]="true"
+                                        [separateDialCode]="separateDialCode" name="phone" formControlName="phone">
+                                    </ngx-intl-tel-input>
+                                    <div *ngIf="submitted && validation.phone.errors" class="invalid-feedback">
+                                        <div *ngIf="validation.phone.errors.required">Phone no. is Mandatory</div>
+                                        <div *ngIf="validation.phone.invalid && !validation.phone.errors.required">
+                                            Invalid Phone No.</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Gender <span class="text-danger">*</span></label>
+                                    <select class="form-control custom-select" formControlName="gender"
+                                        [ngClass]="submitted && validation.gender.errors ? 'is-invalid' : ''">
+                                        <option value="">Select</option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                        <option value="Others">Others</option>
+                                    </select>
+                                    <div *ngIf="submitted && validation.gender.errors" class="invalid-feedback">
+                                        <div *ngIf="validation.gender.errors.required">Please select a gender</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mb-0">
+                                    <label>Date of Birth <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control"
+                                        [ngClass]="submitted && validation.dob.errors ? 'is-invalid' : ''"
+                                        formControlName="dob" bsDatepicker
+                                        [bsConfig]="{ containerClass : 'theme-blue', dateInputFormat:'MM-DD-YYYY', isAnimated:true, showWeekNumbers:false }"
+                                        (bsValueChange)="onDateSelect($event)">
+                                    <div *ngIf="submitted && validation.dob.errors" class="invalid-feedback">
+                                        <div *ngIf="validation.dob.errors.required">DOB is Mandatory</div>
+                                        <div *ngIf="validation.dob.errors && !validation.dob.errors.required">
+                                            Invalid Date</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /Basic Information -->
+                
+                <!-- About Me -->
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">About Me</h4>
+                        <div class="form-group mb-0">
+                            <label>Biography <span class="text-danger">*</span></label>
+                            <textarea class="form-control" rows="5" formControlName="biography"
+                                [ngClass]="submitted && validation.biography.errors ? 'is-invalid' : ''"></textarea>
+                            <div *ngIf="submitted && validation.biography.errors" class="invalid-feedback">
+                                <div *ngIf="validation.biography.errors.required">Biography is Mandatory</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /About Me -->
+
+                <!-- Contact Details -->
+                <div class="card contact-card">
+                    <div class="card-body">
+                        <h4 class="card-title">Contact Details</h4>
+                        <div class="row form-row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Address Line 1 <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" formControlName="addressLine1"
+                                        [ngClass]="submitted && validation.addressLine1.errors ? 'is-invalid' : ''">
+                                    <div *ngIf="submitted && validation.addressLine1.errors"
+                                        class="invalid-feedback">
+                                        <div *ngIf="validation.addressLine1.errors.required">Address 1 is Mandatory
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Address Line 2 <span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" formControlName="addressLine2"
+                                        [ngClass]="submitted && validation.addressLine2.errors ? 'is-invalid' : ''">
+                                    <div *ngIf="submitted && validation.addressLine2.errors"
+                                        class="invalid-feedback">
+                                        <div *ngIf="validation.addressLine2.errors.required">Address 2 is Mandatory
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">City <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" formControlName="city"
+                                        [ngClass]="submitted && validation.city.errors ? 'is-invalid' : ''">
+                                    <div *ngIf="submitted && validation.city.errors" class="invalid-feedback">
+                                        <div *ngIf="validation.city.errors.required">City is Mandatory</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">State / Province <span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" formControlName="state"
+                                        [ngClass]="submitted && validation.state.errors ? 'is-invalid' : ''">
+                                    <div *ngIf="submitted && validation.state.errors" class="invalid-feedback">
+                                        <div *ngIf="validation.state.errors.required">State is Mandatory</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Country <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" formControlName="country"
+                                        [ngClass]="submitted && validation.country.errors ? 'is-invalid' : ''">
+                                    <div *ngIf="submitted && validation.country.errors" class="invalid-feedback">
+                                        <div *ngIf="validation.country.errors.required">Country is Mandatory</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Postal Code <span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" formControlName="zipcode"
+                                        [ngClass]="submitted && validation.zipcode.errors ? 'is-invalid' : ''">
+                                    <div *ngIf="submitted && validation.zipcode.errors" class="invalid-feedback">
+                                        <div *ngIf="validation.zipcode.errors.required">Postal Code is Mandatory
+                                        </div>
+                                        <div *ngIf="validation.zipcode.errors.pattern">Invalid postal code</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /Contact Details -->
+
+                <!-- Pricing -->
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Pricing</h4>
+
+                        <div class="form-group mb-0">
+                            <div id="pricing_select">
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="price_free" value="Free" class="custom-control-input"
+                                        (change)="handleChange($event)" formControlName="pricingType" checked>
+                                    <label class="custom-control-label" for="price_free">Free</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="price_custom" value="Custom Price"
+                                        class="custom-control-input" (change)="handleChange($event)"
+                                        formControlName="pricingType">
+                                    <label class="custom-control-label" for="price_custom">Custom Price</label>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="row custom_price_cont" id="custom_price_cont" *ngIf="showPrice">
+                            <div class="col-md-4">
+                                <input type="number" class="form-control" id="custom_rating_input"
+                                    name="custom_rating_count" value="" placeholder="price"
+                                    formControlName="priceCharges"
+                                    [ngClass]="submitted && validation.priceCharges.errors ? 'is-invalid' : ''">
+                                <small class="form-text text-muted">Custom price you can add</small>
+                                <div *ngIf="submitted && validation.priceCharges.errors" class="invalid-feedback">
+                                    <div *ngIf="validation.priceCharges.errors.required">Price is Mandatory</div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- /Pricing -->
+
+                <!-- Services and Specialization -->
+                <div class="card services-card">
+                    <div class="card-body">
+                        <h4 class="card-title">Services and Specialization</h4>
+                        <div class="form-group">
+                            <label>Services</label>
+                            <tag-input 
+                            theme='bootstrap3-info' 
+                            name="services" 
+                            [(ngModel)]='services'
+                            [ngModelOptions]="{standalone: true}" 
+                            (onRemove)="onRemoveChips($event, 'service')"
+                            (onAdd)="onAddChips($event, 'service')">
+                            </tag-input>
+                            <small class="form-text text-muted">Note : Type & Press enter to add new
+                                services</small>
+                            <div *ngIf="showServiceError" class="invalid-feedback">
+                                <div>Service is Mandatory</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Specialization </label>
+                            <tag-input 
+                            theme='bootstrap3-info' 
+                            name="specialization" 
+                            [(ngModel)]='specialization'
+                            [ngModelOptions]="{standalone: true}"
+                            (onRemove)="onRemoveChips($event, 'special')"
+                            (onAdd)="onAddChips($event, 'special')">
+
+                            </tag-input>
+                            <small class="form-text text-muted">Note : Type & Press enter to add new
+                                specialization</small>
+                            <div *ngIf="showSpecializationError" class="invalid-feedback">
+                                <div>Specialization is Mandatory</div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Dentist Type </label>
+                            <tag-input 
+                            theme='bootstrap3-info' 
+                            name="dentistType" 
+                            [(ngModel)]='dentistType'
+                            [ngModelOptions]="{standalone: true}"
+                            (onRemove)="onRemoveChips($event, 'dentist')"
+                            (onAdd)="onAddChips($event, 'dentist')">
+
+                            </tag-input>
+                            <small class="form-text text-muted">Note : Type & Press enter to add new
+                                Dentist type</small>
+                            <div *ngIf="showDentistTypeError" class="invalid-feedback">
+                                <div> Dentist type is Mandatory</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /Services and Specialization -->
+
+                <!-- Education -->
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Education</h4>
+                        <div class="education-info">
+                            <div class="row form-row education-cont"
+                                *ngFor="let educationGroup of addDoctorForm?.get('education').controls;let i = index"
+                                [formGroup]="educationGroup">
+                                <div class="col-12 col-md-10 col-lg-11">
+                                    <div class="row form-row">
+                                        <div class="col-12 col-md-6 col-lg-4">
+                                            <div class="form-group">
+                                                <label>Degree</label>
+                                                <input type="text" class="form-control" formControlName="degree">
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-4">
+                                            <div class="form-group">
+                                                <label>College/Institute</label>
+                                                <input type="text" class="form-control"
+                                                    formControlName="collegName">
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-4">
+                                            <div class="form-group">
+                                                <label>From Year</label>
+                                                <input type="text" class="form-control" [ngClass]="submitted && validation.education['controls'][i]['controls']['fromYear'].errors ? 'is-invalid' : ''"
+                                                    formControlName="fromYear">
+                                                <div *ngIf="submitted && validation.education['controls'][i]['controls']['fromYear'].errors" class="invalid-feedback">
+                                                    <div *ngIf="validation.education['controls'][i]['controls']['fromYear'].errors.pattern">Invalid year</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-4">
+                                            <div class="form-group">
+                                                <label>Year of Completion</label>
+                                                <input type="text" class="form-control" [ngClass]="submitted && validation.education['controls'][i]['controls']['completionYear'].errors ? 'is-invalid' : ''"
+                                                    formControlName="completionYear">
+                                                <div *ngIf="submitted && validation.education['controls'][i]['controls']['completionYear'].errors" class="invalid-feedback">
+                                                    <div *ngIf="validation.education['controls'][i]['controls']['completionYear'].errors.pattern">Invalid year</div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-2 col-lg-1" *ngIf="i !== 0">
+                                    <label class="d-md-block d-sm-none d-none">&nbsp;</label>
+                                    <a href="javascript:void(0);" class="btn btn-danger trash"
+                                        (click)="deleteAddressGroup(i, 'education')"><i class="fa fa-trash"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="add-more">
+                            <a href="javascript:void(0);" class="add-education"
+                                (click)="addNewGroup('education')"><i class="fa fa-plus-circle"></i> Add
+                                More</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- /Education -->
+
+                <!-- Experience -->
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Experience</h4>
+                        <div class="experience-info">
+                            <div class="row form-row experience-cont"
+                                *ngFor="let experienceGroup of addDoctorForm?.get('experience').controls;let i = index"
+                                [formGroup]="experienceGroup">
+                                <div class="col-12 col-md-10 col-lg-11">
+                                    <div class="row form-row">
+                                        <div class="col-12 col-md-6 col-lg-4">
+                                            <div class="form-group">
+                                                <label>Hospital Name</label>
+                                                <input type="text" class="form-control"
+                                                    formControlName="hospitalName">
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-4">
+                                            <div class="form-group">
+                                                <label>From</label>
+                                                <input type="text" class="form-control" formControlName="from" [ngClass]="submitted && validation.experience['controls'][i]['controls']['from'].errors ? 'is-invalid' : ''">
+                                                <div *ngIf="submitted && validation.experience['controls'][i]['controls']['from'].errors" class="invalid-feedback">
+                                                    <div *ngIf="validation.experience['controls'][i]['controls']['from'].errors.pattern">Invalid year</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-4">
+                                            <div class="form-group">
+                                                <label>To</label>
+                                                <input type="text" class="form-control" formControlName="to" [ngClass]="submitted && validation.experience['controls'][i]['controls']['to'].errors ? 'is-invalid' : ''">
+                                                <div *ngIf="submitted && validation.experience['controls'][i]['controls']['to'].errors" class="invalid-feedback">
+                                                    <div *ngIf="validation.experience['controls'][i]['controls']['to'].errors.pattern">Invalid year</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-2 col-lg-1" *ngIf="i !== 0">
+                                    <label class="d-md-block d-sm-none d-none">&nbsp;</label>
+                                    <a href="javascript:void(0);" class="btn btn-danger trash"
+                                        (click)="deleteAddressGroup(i, 'experience')"><i
+                                            class="fa fa-trash"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="add-more">
+                            <a href="javascript:void(0);" class="add-experience"
+                                (click)="addNewGroup('experience')"><i class="fa fa-plus-circle"></i>
+                                Add
+                                More</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- /Experience -->
+
+                <!-- Awards -->
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Awards</h4>
+                        <div class="awards-info">
+                            <div class="row form-row awards-cont"
+                                *ngFor="let awardsGroup of addDoctorForm?.get('awards').controls;let i = index"
+                                [formGroup]="awardsGroup">
+                                <div class="col-12 col-md-5">
+                                    <div class="form-group">
+                                        <label>Awards</label>
+                                        <input type="text" class="form-control" formControlName="name">
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-5">
+                                    <div class="form-group">
+                                        <label>Year</label>
+                                        <input type="text" class="form-control" formControlName="year" [ngClass]="submitted && validation.awards['controls'][i]['controls']['year'].errors ? 'is-invalid' : ''">
+                                        <div *ngIf="submitted && validation.awards['controls'][i]['controls']['year'].errors" class="invalid-feedback">
+                                            <div *ngIf="validation.awards['controls'][i]['controls']['year'].errors.pattern">Invalid year</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-2 col-lg-1" *ngIf="i !== 0">
+                                    <label class="d-md-block d-sm-none d-none">&nbsp;</label>
+                                    <a href="javascript:void(0);" class="btn btn-danger trash"
+                                        (click)="deleteAddressGroup(i, 'awards')"><i class="fa fa-trash"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="add-more">
+                            <a href="javascript:void(0);" class="add-award" (click)="addNewGroup('awards')"><i
+                                    class="fa fa-plus-circle"></i> Add
+                                More</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- /Awards -->
+
+                <!-- Memberships -->
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Memberships</h4>
+                        <div class="membership-info">
+                            <div class="row form-row membership-cont"
+                                *ngFor="let membershipGroup of membership.controls;let i = index"
+                                [formGroup]="membershipGroup">
+                                <div class="col-12 col-md-10 col-lg-5">
+                                    <div class="form-group">
+                                        <label>Memberships</label>
+                                        <input type="text" class="form-control" [formControl]="membershipGroup">
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-2 col-lg-1" *ngIf="i !== 0">
+                                    <label class="d-md-block d-sm-none d-none">&nbsp;</label>
+                                    <a href="javascript:void(0);" class="btn btn-danger trash"
+                                        (click)="deleteAddressGroup(i, 'membership')"><i
+                                            class="fa fa-trash"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="add-more">
+                            <a href="javascript:void(0);" class="add-membership"
+                                (click)="addNewGroup('membership')"><i class="fa fa-plus-circle"></i>
+                                Add
+                                More</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- /Memberships -->
+
+                <!-- Registrations -->
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Registrations</h4>
+                        <div class="registrations-info">
+                            <div class="row form-row reg-cont"
+                                *ngFor="let registrationGroup of addDoctorForm?.get('registrations').controls;let i = index"
+                                [formGroup]="registrationGroup">
+                                <div class="col-12 col-md-5">
+                                    <div class="form-group">
+                                        <label>Registrations</label>
+                                        <input type="text" class="form-control" formControlName="name">
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-5">
+                                    <div class="form-group">
+                                        <label>Year</label>
+                                        <input type="text" class="form-control" formControlName="year" [ngClass]="submitted && validation.registrations['controls'][i]['controls']['year'].errors ? 'is-invalid' : ''">
+                                        <div *ngIf="submitted && validation.registrations['controls'][i]['controls']['year'].errors" class="invalid-feedback">
+                                            <div *ngIf="validation.registrations['controls'][i]['controls']['year'].errors.pattern">Invalid year</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-2 col-lg-1" *ngIf="i !== 0">
+                                    <label class="d-md-block d-sm-none d-none">&nbsp;</label>
+                                    <a href="javascript:void(0);" class="btn btn-danger trash"
+                                        (click)="deleteAddressGroup(i, 'registrations')"><i
+                                            class="fa fa-trash"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="add-more">
+                            <a href="javascript:void(0);" class="add-reg" (click)="addNewGroup('registrations')"><i
+                                    class="fa fa-plus-circle"></i> Add
+                                More</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- /Registrations -->
+                
+                <div class="submit-section submit-btn-bottom">
+                    <button type="submit" class="btn btn-primary submit-btn" (click)="submitForm()">Save Changes</button>
+                </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+</div>		
+<!-- /Page Content -->

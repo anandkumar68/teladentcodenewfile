@@ -1,0 +1,111 @@
+/* You can add global styles to this file, and also import other style files */
+
+.kk
+{
+    width: 20%;
+    background: #3a9cd8 !important;
+    color: white;
+    font-size: 14px;
+}
+
+.w100
+{
+    width: 100% !important;
+}
+
+.btn-grad.kkh:hover {
+    background: #3a9cd8 !important;
+    color: white !important;
+}
+
+.btn-grad.kkall:hover {
+    background: #3a9cd8 !important;
+    color: white !important;
+}
+
+.btn-grad.kk:hover {
+    background: #3a9cd8 !important;
+    color: white !important;
+}
+
+.btn-grad.kk2:hover {
+    background: #3a9cd8 !important;
+    color: white !important;
+}
+
+.btn-grad:hover {
+    background-position: right center;
+    color: #3a9cd8 !important;
+    text-decoration: none;
+    background: transparent !important;
+}
+
+.kkh {
+    width: 100%;
+    background: #3a9cd8 !important;
+    color: white !important;
+    font-size: 14px;
+}
+
+.kkall {
+    
+    background: #3a9cd8 !important;
+    color: white !important;
+    font-size: 14px;
+}
+
+.btn-grad {
+    margin: 18px 5px;
+    padding: 8px 21px 8px 21px;
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: #3a9cd8;
+    box-shadow: 0 0 0px #eee;
+    border-radius: 100px;
+    display: block;
+    background: white;
+    border: 1px solid #3a9cd8;
+}
+
+.btn-grad:hover {
+    background-position: right center;
+    color: white;
+    text-decoration: none;
+    background: #3a9cd8;
+}
+
+.footer .footer-bottom .copyright-text p a {
+    color: #ffffff;
+    -webkit-transition: all 0.4s ease 0s;
+    -o-transition: all 0.4s ease 0s;
+    transition: all 0.4s ease 0s;
+}
+
+.footer .footer-menu ul li a {
+    color: #fff;
+    font-size: 15px;
+    padding-left: 0px;
+    position: relative;
+    transition: all 0.4s ease 0s;
+}
+
+.footer .footer-menu ul li a::before {
+   display: none;
+}
+
+.gradient-bg {
+    /* background: linear-gradient(
+-45deg
+, #ee7752, #e73c7e, #23a6d5, #23d5ab); */
+    /* background: linear-gradient(
+-45deg
+, #1c5993, #1375b3, #259cd7, #23a6d5); */
+    background: linear-gradient(
+-45deg
+, #5cd2fd, #329ace, #0b5786, #012e58);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+    background: #014974;
+}

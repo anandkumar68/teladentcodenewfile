@@ -1,0 +1,9 @@
+.new-card-body {
+    padding: 1.5rem;
+    background-color: #ececec;
+}
+.disabled {
+    background-color: #478dd3 ;
+    cursor: none;
+    pointer-events: none;
+}

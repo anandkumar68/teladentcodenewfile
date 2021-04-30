@@ -1,0 +1,191 @@
+<ngx-ui-loader [loaderId]="'loader-01'"></ngx-ui-loader>
+  <!-- Main Wrapper -->
+    <div class="main-wrapper">
+        
+        <!-- Page Wrapper -->
+        <div class="page-wrapper">
+            <div class="content container-fluid">
+
+                <!-- Breadcrumb -->
+<div class="breadcrumb-bar">
+    <div class="container-fluid">
+        <div class="row align-items-center">
+            <div class="col-md-8 col-12">
+                <nav aria-label="breadcrumb" class="page-breadcrumb">
+                </nav>
+                <h2 class="breadcrumb-title">Blog Details</h2>
+            </div>
+            <!-- <div class="col-md-4 col-12 d-md-block d-none">
+                <div class="sort-by">
+                    <span class="sort-title">Sort by</span>
+                    <span class="sortby-fliter">
+                        <select class="select">
+                            <option>Select</option>
+                            <option class="sorting">Rating</option>
+                            <option class="sorting">Popular</option>
+                            <option class="sorting">Latest</option>
+                            <option class="sorting">Free</option>
+                        </select>
+                    </span>
+                </div>
+            </div> -->
+        </div>
+    </div>
+</div>
+<!-- /Breadcrumb -->
+
+                <div class="row" *ngIf="blogId !== null">
+                    <div class="col-sm-12">
+
+
+                        <!-- Blog Details-->
+                        <div class="blog-view">
+                            <div class="blog blog-single-post">
+                                <div class="blog-image">
+                                    <a href="javascript:void(0);"><img alt="" src="{{blogDetails?.blogImage}}" class="img-fluid"></a>
+                                </div>
+                                <h3 class="blog-title">{{blogDetails?.blogTitle}}</h3>
+                                <div class="blog-info clearfix">
+                                    <div class="post-left">
+                                        <ul>
+                                            <li>
+                                                <div class="post-author">
+                                                    <a href="doctor-profile.html"><img src="assets/img/doctors/doctor-thumb-02.jpg" alt="Post Author"> <span>Dr. Darren Elder</span></a>
+                                                </div>
+                                            </li>
+                                            <li><i class="far fa-calendar"></i>{{ blogDetails?.createdAt | date: 'dd MMM yyyy' }}</li>
+                                            <!-- <li><i class="far fa-comments"></i>12 Comments</li>
+                                            <li><i class="fa fa-tags"></i>Health Tips</li> -->
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="blog-content">
+                                    <p *ngFor="let blog of blogDetails?.blogDesc">{{ blog }}</p>
+                                </div>
+                                <br/>
+                                <div class="blog-content" *ngFor="let subtitle of blogDetails?.subTitle">
+                                    <h5>{{subtitle?.subTitleHeading}}</h5>
+                                    <h6 *ngFor="let heading of subtitle.heading, let i = index;">
+                                        <strong *ngIf="heading?.title.trim().length > 0 && heading?.description.trim().length > 0">{{i + 1}}. {{heading?.title}}</strong>
+                                        <p *ngIf="heading?.title.trim().length > 0 && heading?.description.trim().length > 0"> {{ heading?.description }} </p>
+                                    </h6>
+                                    
+                                    <p *ngFor="let subDesc of subtitle?.subDescArray">{{subDesc}}</p>
+                                    <br/>
+                                    
+                                </div>
+                            </div>
+
+                            <div class="card author-widget clearfix">
+                                <div class="card-header">
+                                    <h4 class="card-title">About Author</h4>
+                                </div>
+                                <div class="card-body">
+                                    <div class="about-author">
+                                        <div class="about-author-img">
+                                            <div class="author-img-wrap">
+                                                <a href="doctor-profile.html"><img class="img-fluid rounded-circle" alt="" src="assets/img/doctors/doctor-thumb-02.jpg"></a>
+                                            </div>
+                                        </div>
+                                        <div class="author-details">
+                                            <a href="doctor-profile.html" class="blog-author-name">Dr. Darren Elder</a>
+                                            <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- /Blog Details-->
+                    </div>
+                </div>
+
+                <div class="row" *ngIf="blogId === null">
+                    <div class="col-sm-12">
+
+
+                        <!-- Blog Details-->
+                        <div class="blog-view" *ngFor="let blogDetails of allBlogDetails | paginate: { itemsPerPage: perPage, currentPage: currentPage, totalItems: total }, let i = index;">
+                            <div class="blog blog-single-post">
+                                <div class="blog-image">
+                                    <a href="javascript:void(0);"><img alt="" src="{{blogDetails?.blogImage}}" class="img-fluid"></a>
+                                </div>
+                                <h3 class="blog-title">{{blogDetails?.blogTitle}}</h3>
+                                <div class="blog-info clearfix">
+                                    <div class="post-left">
+                                        <ul>
+                                            <li>
+                                                <div class="post-author">
+                                                    <a href="doctor-profile.html"><img src="assets/img/doctors/doctor-thumb-02.jpg" alt="Post Author"> <span>Dr. Darren Elder</span></a>
+                                                </div>
+                                            </li>
+                                            <li><i class="far fa-calendar"></i>{{ blogDetails?.createdAt | date: 'dd MMM yyyy' }}</li>
+                                            <!-- <li><i class="far fa-comments"></i>12 Comments</li>
+                                            <li><i class="fa fa-tags"></i>Health Tips</li> -->
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="blog-content">
+                                    <p *ngFor="let blog of blogDetails?.blogDesc">{{ blog }}</p>
+                                </div>
+                                <br/>
+                                <div class="blog-content" *ngFor="let subtitle of blogDetails?.subTitle">
+                                    <h5>{{subtitle?.subTitleHeading}}</h5>
+                                    <h6 *ngFor="let heading of subtitle.heading, let i = index;">
+                                        <strong *ngIf="heading?.title.trim().length > 0 && heading?.description.trim().length > 0">{{i + 1}}. {{heading?.title}}</strong>
+                                        <p *ngIf="heading?.title.trim().length > 0 && heading?.description.trim().length > 0"> {{ heading?.description }} </p>
+                                    </h6>
+                                    
+                                    <p *ngFor="let subDesc of subtitle?.subDescArray">{{subDesc}}</p>
+                                    <br/>
+                                    
+                                </div>
+                            </div>
+
+                            <div class="card author-widget clearfix">
+                                <div class="card-header">
+                                    <h4 class="card-title">About Author</h4>
+                                </div>
+                                <div class="card-body">
+                                    <div class="about-author">
+                                        <div class="about-author-img">
+                                            <div class="author-img-wrap">
+                                                <a href="doctor-profile.html"><img class="img-fluid rounded-circle" alt="" src="assets/img/doctors/doctor-thumb-02.jpg"></a>
+                                            </div>
+                                        </div>
+                                        <div class="author-details">
+                                            <a href="doctor-profile.html" class="blog-author-name">Dr. Darren Elder</a>
+                                            <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- /Blog Details-->
+                        <!-- Blog Pagination -->
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="blog-pagination">
+                                    <div class="row result-str" *ngIf="total !== 0">
+                                        <div class="col-sm-12 col-md-5 ">
+                                            <p> {{ (currentPage-1) * perPage + 1 }} to {{ math.min((currentPage * perPage), total) }} of {{ total }} entries </p>
+                                        </div>
+                                        <div class="col-sm-12 col-md-7 text-right">
+                                            <pagination-controls [directionLinks]="directionLinks" [autoHide]="autoHide" [responsive]="responsive" [previousLabel]="labels.previousLabel" [nextLabel]="labels.nextLabel" (pageChange)="onPageChange($event)">
+                                            </pagination-controls>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /Blog Pagination -->
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!-- /Page Wrapper -->
+
+    </div>
+    <!-- /Main Wrapper -->

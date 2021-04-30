@@ -1,0 +1,79 @@
+.column {
+  float: left;
+  width: 33.33%;
+  padding: 5px;
+}
+
+/* Clearfix (clear floats) */
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.container {
+  position: relative;
+}
+
+.mod_title {
+  position: absolute;
+  left: 5px;
+  top: 3px;
+  font-weight: 700;
+  font-size: 11px;
+  text-align: center;
+  text-transform: uppercase;
+  color: black;
+  z-index: 1;
+  transition: top .5s ease;
+}
+
+.mod_overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0);
+  transition: background 0.5s ease;
+}
+
+.container:hover .mod_overlay {
+  display: block;
+  background: rgba(0, 0, 0, .3);
+}
+
+.mod_button {
+  position: absolute;
+  width: 500px;
+  left:-115px;
+  top: 68px;
+  text-align: center;
+  opacity: 0;
+  transition: opacity .35s ease;
+}
+
+.mod_button a {
+  width: 200px;
+  padding: 12px 48px;
+  text-align: center;
+  background-color: brown;
+  color: white;
+  border: solid 2px white;
+  z-index: 1;
+}
+
+.container:hover .mod_button {
+  opacity: 1;
+}
+
+.no_appointment {
+  background-color: #fff;
+  border: 1px solid #f0f0f0;
+  border-radius: 4px;
+  display: -ms-flexbox;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+  padding: 20px;
+}

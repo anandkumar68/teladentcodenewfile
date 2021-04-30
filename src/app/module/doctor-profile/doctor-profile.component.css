@@ -1,0 +1,4 @@
+.disabled {
+    cursor: none;
+    pointer-events: none;
+}

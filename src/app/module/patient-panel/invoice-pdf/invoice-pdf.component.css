@@ -1,0 +1,6 @@
+.vertical-center {
+    margin: 0;
+    position: absolute;
+    -ms-transform: translateY(-50%)translateX(396%);
+    transform: translateY(-50%)translateX(396%);
+  }

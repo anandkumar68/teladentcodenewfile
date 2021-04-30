@@ -1,0 +1,152 @@
+<!-- Footer -->
+<footer class="footer gradient-bg">
+
+    <!-- Footer Top -->
+    <div class=" footer-top ">
+        <div class="container-fluid ">
+            <div class="row ">
+                <div class="col-lg-3 col-md-6 ">
+
+                    <!-- Footer Widget -->
+                    <div class="footer-widget footer-about ">
+                        <div class="footer-logo ">
+                            <h1 class="text-white ">
+
+                               <img src="../../../assets/img/home/mask_group_8.png">
+                            </h1>
+                            <!-- <img src="assets/img/teladent_2.png " alt="logo "> -->
+                        </div>
+                        <div class="footer-about-content ">
+                            <p>Indi’s first tele dentistry platform that provides virtual advice and expert opinion for all your
+                                dental problems.</p>
+                            <div class="social-icon ">
+                                <ul>
+                                    <li>
+                                        <a href="# " target="_blank "><i class="fab fa-facebook-f "></i> </a>
+                                    </li>
+                                    <li>
+                                        <a href="# " target="_blank "><i class="fab fa-twitter "></i> </a>
+                                    </li>
+                                    <li>
+                                        <a href="# " target="_blank "><i class="fab fa-linkedin-in "></i></a>
+                                    </li>
+                                    <li>
+                                        <a href="# " target="_blank "><i class="fab fa-instagram "></i></a>
+                                    </li>
+                                    <li>
+                                        <a href="# " target="_blank "><i class="fab fa-dribbble "></i> </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /Footer Widget -->
+
+                </div>
+
+                <div class="col-lg-3 col-md-6 ">
+
+                    <!-- Footer Widget -->
+                    <div class="footer-widget footer-menu ">
+                        <h2 class="footer-title ">For Patients</h2>
+                        <ul>
+                            <!-- <li><a href="search.html ">Search for Clinics</a></li> -->
+                            <li><a (click)="patientRouter('login', 'login-modal', '/index', 'user')" href="javascript:void(0); ">Login</a></li>
+                            <li><a (click)="patientRouter('signup', 'login-modal', '/index', 'user')" href="javascript:void(0);">Register</a></li>
+                            <li><a (click)="patientRouter('booking', 'login-modal', '/online-consultation?limit=10&skip=0', 'user')" href="javascript:void(0);">Booking Appointment</a></li>
+                            <li><a (click)="patientRouter('patientDash', 'login-modal', '/patient-panel/patient-dashboard', 'user')" href="javascript:void(0);">Patient Dashboard</a></li>
+                            <app-login-modal></app-login-modal>
+                        </ul>
+                    </div>
+                    <!-- /Footer Widget -->
+
+                </div>
+
+                <div class="col-lg-3 col-md-6 ">
+
+                    <!-- Footer Widget -->
+                    <div class="footer-widget footer-menu ">
+                        <h2 class="footer-title ">For Dentist</h2>
+                        <ul>
+                            <li><a (click)="densitRouter('appointment', 'login-modal', '/doctors-panel/doctor-appointments', 'onlineDoctors')" href="javascript:void(0);">Appointments</a></li>
+                            <!-- <li><a href="chat.html ">Chat</a></li> -->
+                            <li><a (click)="densitRouter('login', 'login-modal', '/index', 'onlineDoctors')" href="javascript:void(0);">Login</a></li>
+                            <li><a (click)="densitRouter('signup', 'login-modal', '/index', 'onlineDoctors')" href="javascript:void(0);">Register</a></li>
+                            <li><a (click)="densitRouter('doctorDash', 'login-modal', '/doctor-dashboard', 'onlineDoctors')" href="javascript:void(0);">Dentist Dashboard</a></li>
+                        </ul>
+                    </div>
+                    <!-- /Footer Widget -->
+
+                </div>
+
+                <div class="col-lg-3 col-md-6 ">
+
+                    <!-- Footer Widget -->
+                    <div class="footer-widget footer-contact ">
+                        <h2 class="footer-title ">Contact Us</h2>
+                        <div class="footer-contact-info ">
+                            <div class="footer-address ">
+                                <span><i class="fas fa-map-marker-alt "></i></span>
+                                <p> Nh 8, Avenue Bouganvillea, Mahipalpur,<br> New Delhi, Delhi 110037 </p>
+                            </div>
+                            <p>
+                                <!-- <i class="fas fa-phone-alt "></i> +1 315 369 5943 -->
+                                <i class="fas fa-phone-alt "></i> +91 9899799981
+                            </p>
+                            <p class="mb-0 ">
+                                <i class="fas fa-envelope "></i> teladentist@gmail.com
+                            </p>
+
+                        </div>
+                    </div>
+                    <!-- /Footer Widget -->
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- /Footer Top -->
+
+    <!-- Footer Bottom -->
+    <div class="footer-bottom ">
+        <div class="container-fluid ">
+
+            <!-- Copyright -->
+            <div class="copyright ">
+                <div class="row ">
+                    <div class="col-md-6 col-lg-6 ">
+                        <div class="copyright-text ">
+                            <p class="mb-0 " id="copyright"></p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-6 ">
+
+                        <!-- Copyright Menu -->
+                        <div class="copyright-menu ">
+                            <ul class="policy-menu ">
+                                <li><a (click)="footerRouter('/covid-guidelines')" href="javascript:void(0);">Covid 19 Information</a></li>
+                                <li><a href="#">Terms</a></li>
+                                <li><a href="#">Privacy Policy</a></li>
+                            </ul>
+                        </div>
+                        <!-- /Copyright Menu -->
+
+                    </div>
+                </div>
+            </div>
+            <!-- /Copyright -->
+
+        </div>
+    </div>
+    <!-- /Footer Bottom -->
+
+</footer>
+<!-- /Footer -->
+
+
+<!-- whatsapp chat  -->
+<!-- <div class="fixedbutton">
+            <img src="assets/img/whatapp.png">
+          </div> -->
+<!-- /whatsapp chat  -->

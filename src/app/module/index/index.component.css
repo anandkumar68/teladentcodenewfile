@@ -1,0 +1,304 @@
+
+.bgimg{
+    background-image: url("../../../assets/img/home/group_1162.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    background-color: white;
+    height: 596px;
+}
+
+p.card-text {
+    font-size: 13px;
+    line-height: 18px;
+    color: #272b41;
+}
+
+a.bt {
+    color: #272b41;
+}
+
+.blog {
+    border: 1px solid #f0f0f0;
+    background-color: #fff;
+    border-radius: 4px;
+    margin-bottom: 30px;
+    padding: 1.0rem;
+    position: relative;
+}
+
+.card-body {
+    padding: 0.2rem;
+    padding-top: 29px;
+}
+
+p.ttt {
+    padding-top: 3px;
+    padding-left: 5px;
+}
+
+span.timet {
+    font-size: 12px;
+    padding-left: 9px;
+}
+
+.section-header p {
+    
+    margin-top: 0px;
+}
+
+.card-title {
+    margin-bottom: 13px;
+    margin-top: 13px;
+    font-size: 18px;
+}
+
+span.ltl {
+    padding-left: 14px;
+    font-size: 13px;
+    color: #009efb;
+}
+
+img.du {
+    width: 26px;
+    border-radius: 71%;
+    height: 26px;
+}
+
+.section-header {
+    margin-bottom: 0px;
+}
+
+.t
+{
+    -webkit-text-fill-color: #009efb !important;
+    padding-bottom: 3%;
+}
+
+.bgimg3{
+    background-image: url("../../../assets/img/home/rectangle_179.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding: 65px;
+    background-color: white;
+    box-shadow: 3px 3px 17px 0px #9c9a9a21;
+}
+
+.lpl2 {
+    padding-top: 5%;
+    padding-bottom: 2%;
+}
+
+.bxb
+{
+    box-shadow: 0px 2px 2px 2px #0000000a;
+    padding: 10px;
+    
+}
+
+.w75
+{
+    width: 75%;
+}
+
+.col-sm-2.sd2 {
+    -ms-flex: 0 0 16.666667%;
+    flex: 0 0 19.666667%;
+    max-width: 19.666667%;
+   
+}
+
+
+.lpl
+{
+    padding-top: 2%;
+    padding-bottom: 7%;
+}
+
+.sd img {
+    height: 231px;
+}
+.sd2 img {
+    height: auto;
+    padding-top: 14px;
+}
+
+.nn p {
+    padding-top: 9%;
+    font-size: 14px;
+    padding-left: 12%;
+    padding-right: 17%;
+    color: #696060;
+    font-weight: 500;
+}
+
+.pd5
+{
+    padding-top: 5%;
+    padding-bottom: 5%;
+}
+
+.kk2 {
+    width: 39%;
+    background: #3a9cd8;
+    color: white;
+    font-size: 14px;
+}
+.wwd
+{
+    width: 100%;
+}
+
+.fw
+{
+    font-weight: bolder;
+}
+
+.b1
+{
+    width: 60%;
+    font-size: 13px;
+}
+
+p.st {
+    font-size: 14px;
+    color: #a59999;
+    font-weight: 500;
+}
+
+p.mt {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 13px;
+}
+
+p.stbs {
+    font-size: 14px;
+    color: #696060;
+    font-weight: 500;
+}
+
+p.stb {
+    font-size: 2.15rem;
+    font-weight: bolder;
+    line-height: 39px;
+}
+
+.p17
+{
+    padding: 17px;
+}
+
+.p11
+{
+    padding: 11px;
+}
+
+.oo
+{
+    padding-left: 10%;
+    padding-top: 7%;
+    padding-bottom: 7%;
+    padding-right: 10%;
+}
+
+.bx
+{
+    box-shadow: 4px 2px 9px -9px black;
+    padding: 0px;
+}
+
+.bgimg2{
+    background-image: url("../../../assets/img/home/group_331.png");
+    
+    background-size: 100% 184%;
+    background-repeat: no-repeat;
+}
+
+.icontext p {
+    padding-bottom: 14px;
+}
+
+.icontext {
+    padding-top: 24px;
+}
+
+.bb
+{
+    background-color: white;
+}
+
+.kk
+{
+    width: 20%;
+    background: #3a9cd8;
+    color: white;
+    font-size: 14px;
+}
+
+span.tt {
+    padding-left: 28px;
+    font-size: 14px;
+    color: #272b41;
+    font-weight: 500;
+}
+
+.grad-text {
+    background: transparent;
+    -webkit-text-fill-color: #272b41;
+    
+    color: #272b41;
+}
+
+.pt
+{
+    padding-top: 8%;
+}
+
+@media only screen and (max-width: 600px) {
+
+    .kk {
+        width: 65%;
+       
+    }
+
+    .content {
+        padding: 0px 0 0;
+    }
+
+    .bgimg {
+        
+        height: 517px;
+    }
+
+    .col-sm-2.sd2 {
+        flex: unset;
+        max-width: unset;
+    }
+
+    h3.grad-text {
+        padding-top: 6%;
+    }
+
+    .kk2 {
+        width: 95%;
+        
+    }
+
+    .w75 {
+        width: 100%;
+    }
+
+    .col-sm-4.sd {
+        padding-top: 5%;
+        padding-bottom: 5%;
+    }
+
+    p.stb {
+        
+        font-size: 1.75rem;
+        padding-top: 9%;
+    }
+
+}

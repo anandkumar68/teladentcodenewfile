@@ -1,0 +1,176 @@
+			
+<ngx-ui-loader [loaderId]="'loader-01'"></ngx-ui-loader>
+			
+			<!-- Breadcrumb -->
+			<div class="breadcrumb-bar">
+				<div class="container-fluid">
+					<div class="row align-items-center">
+						<div class="col-md-12 col-12">
+							<!-- <nav aria-label="breadcrumb" class="page-breadcrumb">
+								<ol class="breadcrumb">
+									<li class="breadcrumb-item"><a href="index-2.html">Home</a></li>
+									<li class="breadcrumb-item active" aria-current="page">Checkout</li>
+								</ol>
+							</nav> -->
+							<h2 class="breadcrumb-title">Checkout</h2>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /Breadcrumb -->
+			
+			<!-- Page Content -->
+			<div class="content">
+				<div class="container">
+
+					<div class="row">
+						<div class="col-md-7 col-lg-8">
+							<div class="card">
+								<div class="card-body">
+								
+									<!-- Checkout Form -->
+									<!-- <form> -->
+									
+										<!-- Personal Information -->
+										<div class="info-widget">
+											<h4 class="card-title">Personal Information</h4>
+											<div class="row">
+												<div class="col-md-6 col-sm-12">
+													<div class="form-group card-label">
+														<label>First Name</label>
+														<input class="form-control" value="{{sessionValue?.firstName}}" type="text" readonly>
+													</div>
+												</div>
+												<div class="col-md-6 col-sm-12">
+													<div class="form-group card-label">
+														<label>Last Name</label>
+														<input class="form-control" value="{{sessionValue?.lastName}}" type="text" readonly>
+													</div>
+												</div>
+												<div class="col-md-6 col-sm-12">
+													<div class="form-group card-label">
+														<label>Email</label>
+														<input class="form-control" 
+														id="emailCheck"
+														(keyup)="emailVerification('emailCheck')"
+														value="{{sessionValue?.email}}" type="email">
+														<p class="error-msg">{{emailErrorMsg}}</p>
+													</div>
+													
+												</div>
+												<div class="col-md-6 col-sm-12">
+													<div class="form-group card-label">
+														<label>Phone</label>
+														<input class="form-control" value="{{sessionValue?.phone}}" type="text" readonly>
+													</div>
+												</div>
+												<div class="col-md-6 col-sm-12">
+													<div class="form-group card-label">
+														<label>Service Type</label>
+														<select class="form-control" (change)="selectService($event.target.value)">
+															<option disabled selected value="">Select Service</option>
+															<option value="Dental Emergencies">Dental Emergencies</option>
+															<option value="Dental Online Check Up">Dental Online Check Up</option>
+															<option value="Child Care">Child Care</option>
+															<option value="Second Opinion">Second Opinion</option>
+														</select>
+														<p class="error-msg">{{serviceErrMsg}}</p>
+													</div>
+												</div>
+											</div>
+										</div>
+										<!-- /Personal Information -->
+										
+										<div class="payment-widget">
+											
+											<!-- Submit Section -->
+											<div class="submit-section mt-4">
+												<button 
+												(click)="payViaRazor()" 
+												[ngClass]="allowForPay === undefined || isEmailExist === false || isServiceSelected === false ? 'disabled' : '' "
+												class="btn btn-primary submit-btn">{{buttonValue}}</button>
+											</div>
+											<!-- /Submit Section -->
+											
+										</div>
+									<!-- </form> -->
+									<!-- /Checkout Form -->
+									
+								</div>
+							</div>
+							
+						</div>
+						
+						<div class="col-md-5 col-lg-4 theiaStickySidebar">
+						
+							<!-- Booking Summary -->
+							<div class="card booking-card">
+								<div class="card-header">
+									<h4 class="card-title">Booking Summary</h4>
+								</div>
+								<div class="card-body">
+								
+									<!-- Booking Doctor Info -->
+									<div class="booking-doc-info">
+										<a href="doctor-profile.html" class="booking-doc-img">
+											<img src="{{sessionValue?.doctorDetails?.imageUrl}}" alt="User Image">
+										</a>
+										<div class="booking-info">
+											<h4><a href="doctor-profile.html">{{sessionValue?.doctorDetails?.name}}</a></h4>
+											<div class="rating">
+												<i *ngIf="sessionValue?.doctorDetails?.rating === 1 || sessionValue?.doctorDetails?.rating > 1" class="fas fa-star filled"></i>
+                                        		<i *ngIf="sessionValue?.doctorDetails?.rating < 1" class="fas fa-star"></i>
+
+                                        		<i *ngIf="sessionValue?.doctorDetails?.rating === 2 || sessionValue?.doctorDetails?.rating > 2" class="fas fa-star filled"></i>
+                                        		<i *ngIf="sessionValue?.doctorDetails?.rating < 2" class="fas fa-star"></i>
+
+                                        		<i *ngIf="sessionValue?.doctorDetails?.rating === 3 || sessionValue?.doctorDetails?.rating > 3" class="fas fa-star filled"></i>
+                                        		<i *ngIf="sessionValue?.doctorDetails?.rating < 3" class="fas fa-star"></i>
+
+                                        		<i *ngIf="sessionValue?.doctorDetails?.rating === 4 || sessionValue?.doctorDetails?.rating > 4" class="fas fa-star filled"></i>
+                                        		<i *ngIf="sessionValue?.doctorDetails?.rating < 4" class="fas fa-star"></i>
+
+                                        		<i *ngIf="sessionValue?.doctorDetails?.rating === 5" class="fas fa-star filled"></i>
+                                        		<i *ngIf="sessionValue?.doctorDetails?.rating < 5" class="fas fa-star"></i>
+												<span class="d-inline-block average-rating">({{sessionValue?.doctorDetails?.totalReview}})</span>
+											</div>
+											<div class="clinic-details">
+												<p class="doc-location"><i class="fas fa-map-marker-alt"></i> {{sessionValue?.doctorDetails?.city}}, {{sessionValue?.doctorDetails?.state}}</p>
+											</div>
+										</div>
+									</div>
+									<!-- Booking Doctor Info -->
+									
+									<div class="booking-summary">
+										<div class="booking-item-wrap">
+											<ul class="booking-date">
+												<li>Date <span>{{sessionValue?.slotVlaue?.slotDate | date: 'dd MMM yyyy'}}</span></li>
+												<li>Time <span>{{sessionValue?.slotVlaue?.timeslot}}</span></li>
+											</ul>
+											<ul class="booking-fee">
+												<li>Consulting Fee <span>₹{{paidAmt}}</span></li>
+												<!-- <li>Booking Fee <span>$10</span></li>
+												<li>Video Call <span>$50</span></li> -->
+											</ul>
+											<div class="booking-total">
+												<ul class="booking-total-list">
+													<li>
+														<span>Total</span>
+														<span class="total-cost">₹{{paidAmt}}</span>
+													</li>
+												</ul>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- /Booking Summary -->
+							
+						</div>
+					</div>
+
+				</div>
+
+			</div>		
+			<!-- /Page Content -->		   
+		

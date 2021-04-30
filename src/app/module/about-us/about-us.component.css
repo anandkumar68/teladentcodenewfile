@@ -1,0 +1,213 @@
+.bgw{
+    background-color: white !important;
+}
+
+.bgimg{
+     background-image: url("../../../assets/img/about/bgintro.png");
+    background-size: 100% 75%;
+    background-repeat: no-repeat;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    background-color: white;
+}
+
+.gc
+{
+    padding-left: 15%;
+    padding-right: 15%;
+    font-weight: 500;
+}
+
+span.dd {
+    padding-left: 11px;
+    padding-right: 11px;
+}
+
+.bg-image-21 {
+    background: url(../../../assets/img/about/bbb.png) no-repeat center;
+    background-size: cover;
+}
+
+.ll
+{
+    padding-top: 6%;
+    padding-bottom: 6%;
+}
+
+.subppp
+{
+    padding-left: 19%;
+    padding-right: 19%;
+    padding-top: 11px;
+    padding-bottom: 19px;
+}
+
+.linepo
+{
+        position: absolute;
+    transform: translate(12px, 91px);
+}
+
+p.iconp {
+    padding-top: 17px;
+}
+
+.pr
+{
+    position: relative;
+}
+
+.iconr {
+    padding-bottom: 45px;
+    padding-right: 20px;
+    padding-left: 23px;
+}
+
+.ppprow
+{
+    padding-top: 45px;
+}
+
+.ppprow img {
+    height: 70px;
+}
+
+.ppp
+{
+    padding-top: 6%;
+    padding-bottom: 6%;
+    padding-left: 6%;
+    padding-right: 6%;
+}
+
+.icontext
+{
+    font-size: 15px;
+    padding-top: 16px;
+    font-weight: 500;
+    color: #272b41;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: #272b41;
+    font-weight: 600;
+}
+.cw
+{
+    color: white;
+}
+
+.whysection
+{
+    background: #3a9cd8;
+    color: white;
+    padding: 55px 81px 55px 121px;
+    line-height: 29px;
+    font-size: 16px;
+}
+
+.pb{
+        padding-bottom: 3%;
+}
+
+.ptt
+{
+    padding-top: 7%;
+    padding-bottom: 7% !important;
+}
+
+.teamp2 {
+    padding-left: 55px;
+    padding-top: 6px;
+    color: #927f7f;
+}
+
+.teamp1 {
+    padding-top: 62px;
+    font-size: 15px;
+}
+
+.breadcrumb-bar {
+  
+    margin: 0 0 0px 0;
+}
+
+.p40
+{
+    padding-top: 40px;
+}
+
+.bxsha
+{
+    box-shadow: 5px 7px 7px 1px #00000008;
+}
+
+
+.p_intro
+{
+    padding-left: 21%;
+    padding-right: 21%;
+    color: #272b41;
+    padding-top: 3%;
+    padding-bottom: 0%;
+    font-size: 16px;
+    font-family: "Poppins", sans-serif;
+
+}
+
+@media only screen and (max-width: 600px) {
+  .p_intro {
+    padding-left: 11%;
+    padding-right: 11%;
+    padding-top: 5%;
+    
+}
+
+.teamp2 {
+    padding-left: 20px;
+    padding-top: 6px;
+    
+    padding-right: 20px;
+}
+
+section#team {
+    text-align: left;
+}
+
+img.tela {
+    width: 75%;
+}
+
+.btn-grad {
+    margin: 10px 5px;
+    padding: 13px 10px;
+}
+
+.howicon {
+    padding-bottom: 32px;
+    /* display: flex; */
+}
+
+.linepo {
+    display: none;
+}
+
+.whysection{
+    padding: 52px 53px 55px 53px;
+    
+}
+
+.team {
+    padding-bottom: 33px;
+}
+
+p.iconp {
+    padding-top: 30px;
+}
+
+.teamp1 {
+    padding-top: 5px;
+    font-size: 15px;
+}
+}
+
