@@ -7699,22 +7699,25 @@ section.iq-features {
 
 .news-letter {
     padding: 60px 0;
-    background-image: url(../img/lady.jpg);
+    background-image: url('/rectangle_179.png');
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
 }
-
+footer.footer.gradient-bg {
+    margin-top: 0;
+}
 .news-letter .news-letter-col input[type="email"] {
     background-color: #fff;
-    height: 60px;
-    font-size: 17px;
-    border-radius: 50px;
-    border: 1px solid #1c5993;
+    height: 40px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #7373731c;
     padding: 10px 25px;
     min-width: 270px;
     color: #259cd7;
     outline: none;
+    margin-right: 20px;
 }
 
 .form-col ul {

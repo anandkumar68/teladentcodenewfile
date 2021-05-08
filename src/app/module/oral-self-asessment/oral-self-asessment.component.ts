@@ -36,7 +36,7 @@ export class OralSelfAsessmentComponent implements OnInit {
     body.style.overflowY = 'scroll';
     
   }
-  ngOnInit() {
+  ngOnInit():void {
    
   }
  
