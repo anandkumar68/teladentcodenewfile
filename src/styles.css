@@ -147,4 +147,14 @@ img.card-img-top {
     margin: auto;
     margin-top: 20px;
 }
+.news-letter {
+    padding: 60px 0;
+    background-image: url(/assets/img/grabmb.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.texcenr{
+    text-align: center!important;
+}
 }
